@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/Kebertr/homeserver-gitops.git
     targetRevision: main
-    path: charts/nginx
+    path: helm_charts/nginx
 
   destination:
     server: https://kubernetes.default.svc
