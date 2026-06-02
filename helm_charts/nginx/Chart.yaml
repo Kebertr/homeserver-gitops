@@ -1,0 +1,6 @@
+# Chart.yaml
+apiVersion: v2
+name: nginx
+description: Try to get nginx to work
+version: 1.0.0
+appVersion: "1.0"

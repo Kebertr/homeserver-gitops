@@ -1,0 +1,39 @@
+# Argo CD Configuration for LTU M7011E
+# Change these values to match your setup
+
+argocd:
+  # Your assigned domain for Argo CD UI
+  domain: argocd.kebert.se
+
+# Argo CD version
+image:
+  repository: quay.io/argoproj/argocd
+  tag: v3.6
+
+# Resource limits
+resources:
+  server:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+  repoServer:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+  applicationController:
+    requests:
+      cpu: 250m
+      memory: 256Mi
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+
+# Enable ingress for web UI
+ingress:
+  enabled: true

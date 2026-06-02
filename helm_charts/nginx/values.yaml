@@ -1,0 +1,9 @@
+app:
+  name: nginx
+  replicas: 1
+
+domain: nginx.kebert.se
+
+image:
+  repository: nginx
+  tag: latest
