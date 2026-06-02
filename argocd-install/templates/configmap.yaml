@@ -4,7 +4,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: argocd-cmd-params-cm
+  name: argocd-cm
   namespace: {{ .Release.Namespace }}
 data:
   # Timeout settings
@@ -12,8 +12,6 @@ data:
 
   # Application settings
   application.instanceLabelKey: argocd.argoproj.io/instance
-
-  server.insecure: "true"
 
   # Add Git repositories here if using private repos
   # repositories: |
