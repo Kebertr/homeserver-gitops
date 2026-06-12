@@ -1,9 +1,6 @@
-# Argo CD Configuration for LTU M7011E
-# Change these values to match your setup
-
 argocd:
   # Your assigned domain for Argo CD UI
-  domain: argocd.kebert.se
+  domain: argocd
 
 # Argo CD version
 image:
