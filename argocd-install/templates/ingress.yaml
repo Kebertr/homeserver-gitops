@@ -6,14 +6,8 @@ metadata:
 spec:
   ingressClassName: tailscale
 
-  rules:
-  - host: {{ .Values.argocd.domain }}
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: argocd-server
-            port:
-              number: 80
+  defaultBackend:
+    service:
+      name: argocd-server
+      port:
+        number: 80
