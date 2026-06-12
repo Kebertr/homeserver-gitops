@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: StatefulSet 
+metadata:
+  name: minio-statefulset
+  labels:
+    app: minio
+spec:
+  serviceName: "minio-service"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: minio
+  template:
+     metadata:
+       labels:
+          app: minio
+     spec:
+         containers:
+           - name: minio
+             image: {{ (.Values.MinioImage) }} :{{ (.Values.MinioTag) }} 
+             imagePullPolicy: "IfNotPresent"
+             ports:
+               - containerPort: 9000
+               - containerPort: 9001
+             args:
+               - server
+               - /data  
+               - --console-address 
+               - ":9001"
+             envFrom:
+               - secretRef:
+                   name: minio-secret
+             volumeMounts:
+               - mountPath: /data
+                 name: miniodb
+             {{ if .Values.MinioResourceLimit }}
+             resources:
+                limits:
+                  memory: {{ (.Values.MinioMemory | quote) }}
+                requests:
+                  cpu: {{ (.Values.MinioCPU | quote) }}
+                  memory: {{ (.Values.MinioMemory | quote) }}
+             {{ end }}
+  volumeClaimTemplates:
+      - metadata:
+          name: miniodb
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          storageClassName: {{ .Values.StorageClassName }}
+          resources:
+            requests:
+              storage: {{ .Values.MinioStorage }}

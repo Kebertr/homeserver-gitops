@@ -1,0 +1,11 @@
+StorageClassName: local-path 
+Timezone: "Europe/Stockholm"
+
+MinioImage: quay.io/minio/minio
+MinioTag: latest
+
+MinioStorage: 20Gi
+
+MinioResourceLimit: true
+MinioCPU: "1000m"
+MinioMemory: "1000Mi"
