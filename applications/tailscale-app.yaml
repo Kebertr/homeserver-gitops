@@ -8,14 +8,16 @@ spec:
 
   source:
     repoURL: https://pkgs.tailscale.com/helmcharts
-    targetRevision: 1.88.3
+    targetRevision: 1.98.4
     chart: tailscale-operator
 
     helm:
       values: |
         operatorConfig:
           defaultTags:
-            - "tag:kubernetes"
+            - "tag:k8s"
+        proxyConfig:
+          defaultTags: "tag:k8s"
   destination:
     server: https://kubernetes.default.svc
     namespace: tailscale
