@@ -17,7 +17,7 @@ spec:
      spec:
          containers:
            - name: minio
-             image: {{ (.Values.MinioImage) }} :{{ (.Values.MinioTag) }} 
+             image: {{ (.Values.MinioImage) }}:{{ (.Values.MinioTag) }} 
              imagePullPolicy: "IfNotPresent"
              ports:
                - containerPort: 9000
