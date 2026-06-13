@@ -9,7 +9,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/Kebertr/homeserver-gitop.git
+    repoURL: https://github.com/Kebertr/homeserver-gitops.git
     targetRevision: main
     path: helm_charts/cloudflare
 
