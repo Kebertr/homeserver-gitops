@@ -1,6 +1,6 @@
 tunnel: homelab
 
-replicas: 0
+replicas: 2
 
 image:
   repository: cloudflare/cloudflared
