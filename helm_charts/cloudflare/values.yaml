@@ -1,0 +1,12 @@
+tunnel: homelab
+
+replicas: 2
+
+image:
+  repository: cloudflare/cloudflared
+  tag: latest
+
+hostname: "*.kebert.se"
+
+service:
+  url: http://traefik.kube-system.svc.cluster.local:80
