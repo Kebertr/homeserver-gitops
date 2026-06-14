@@ -24,13 +24,3 @@ ingress
 
 namespaces
 ```kubectl get namespaces```
-
-Cloudflare tunnel:
-Creating:
-```cloudflared tunnel run [name]```
-
-login to Cloudflare:
-```cloudflared tunnel login```
-
-run it:
-```cloudflared tunnel run homelab```
