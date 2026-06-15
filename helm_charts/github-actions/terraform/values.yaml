@@ -6,3 +6,7 @@ githubConfigSecret: github-runner-sec
 
 minRunners: 0
 maxRunners: 1
+
+controllerServiceAccount:
+  namespace: arc
+  name: action-runner-controller-gha-rs-controller

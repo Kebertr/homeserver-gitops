@@ -21,6 +21,10 @@ spec:
         minRunners: {{ .Values.minRunners }}
         maxRunners: {{ .Values.maxRunners }}
 
+        controllerServiceAccount:
+          namespace: {{ .Values.controllerServiceAccount.namespace }}
+          name: {{ .Values.controllerServiceAccount.name }}
+
   destination:
     server: https://kubernetes.default.svc
     namespace: git-runner
