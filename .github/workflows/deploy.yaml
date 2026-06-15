@@ -1,0 +1,53 @@
+name: homeserver-gitops test
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: homeserver-gitops
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Helm
+        run: |
+          curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+      - name: Helm Lint Cloudflare
+        run: helm lint helm_charts/cloudflare
+
+      - name: Helm Lint Github Actions
+        run: helm lint helm_charts/github-actions/gitops
+
+      - name: Helm Lint Github Actions
+        run: helm lint helm_charts/github-actions/terraform
+
+      - name: Helm Lint MinIO
+        run: helm lint helm_charts/minio
+
+      - name: Helm Lint Nginx
+        run: helm lint helm_charts/nginx
+
+      - name: Helm Render Cloudflare
+        run: helm template test helm_charts/cloudflare > /dev/null
+
+      - name: Helm Render Github Actions
+        run: helm template test helm_charts/github-actions/gitops > /dev/null
+
+      - name: Helm Render Github Actions
+        run: helm template test helm_charts/github-actions/terraform > /dev/null
+
+      - name: Helm Render MinIO
+        run: helm template test helm_charts/minio > /dev/null
+
+      - name: Helm Render Nginx
+        run: helm template test helm_charts/nginx > /dev/null
+
+      - name: Success
+        run: echo "GitOps validation passed"
+
+
+      
