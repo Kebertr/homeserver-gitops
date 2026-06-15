@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: prometheus-ingress
   namespace: {{ .Values.app.namespace }}
+  annotations:
+    tailscale.com/hostname: "{{ .Values.app.name }}"
 spec:
   ingressClassName: tailscale
 

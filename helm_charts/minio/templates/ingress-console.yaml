@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: minio-console-tailscale
   namespace: minio
+  annotations:
+    tailscale.com/hostname: "ingress-console"
 spec:
   ingressClassName: tailscale
 

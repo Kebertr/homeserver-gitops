@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: minio-api-tailscale
   namespace: minio
+  annotations:
+    tailscale.com/hostname: "ingress-api"
 spec:
   ingressClassName: tailscale
 
