@@ -31,6 +31,9 @@ jobs:
       - name: Helm Lint Nginx
         run: helm lint helm_charts/nginx
 
+      - name: Helm Lint Prometheus
+        run: helm lint helm_charts/prometheus
+
       - name: Helm Render Cloudflare
         run: helm template test helm_charts/cloudflare > /dev/null
 
@@ -45,6 +48,12 @@ jobs:
 
       - name: Helm Render Nginx
         run: helm template test helm_charts/nginx > /dev/null
+
+      - name: Helm Render Nginx
+        run: helm template test helm_charts/nginx > /dev/null
+
+      - name: Helm Render Prometheus
+        run: helm template test helm_charts/prometheus > /dev/null
 
       - name: Success
         run: echo "GitOps validation passed"
