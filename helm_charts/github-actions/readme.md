@@ -4,6 +4,8 @@ PAT would be faster. But more insecure if anyone got hold of it.
 
 Create a GIthub app and store the RSA pem safe. 
 
+Give the repository permission to read metadata and read and write actions and administration.
+
 Then Install App. 
 
 Go into the github app and get the ID.
