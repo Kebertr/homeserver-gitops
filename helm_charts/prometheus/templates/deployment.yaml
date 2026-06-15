@@ -32,9 +32,6 @@ spec:
         - name: config
           mountPath: /etc/prometheus/prometheus.yml
           subPath: prometheus.yml
-        - name: alerts
-          mountPath: /etc/prometheus/alerts.yml
-          subPath: alerts.yml
         - name: storage
           mountPath: /prometheus
         resources:
@@ -53,19 +50,3 @@ spec:
           name: prometheus-alerts
       - name: storage
         emptyDir: {}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: prometheus
-  namespace: {{ .Values.app.namespace }}
-  labels:
-    app: prometheus
-spec:
-  type: ClusterIP
-  selector:
-    app: prometheus
-  ports:
-  - port: 9090
-    targetPort: 9090
-    name: web
