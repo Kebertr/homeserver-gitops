@@ -51,10 +51,7 @@ jobs:
 
       - name: Helm Render Nginx
         run: helm template test helm_charts/nginx > /dev/null
-
-      - name: Helm Render Nginx
-        run: helm template test helm_charts/nginx > /dev/null
-
+        
       - name: Helm Render Prometheus
         run: helm template test helm_charts/prometheus > /dev/null
 
