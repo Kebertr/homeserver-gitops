@@ -1,0 +1,21 @@
+app:
+  name: grafana
+  replicas: 1
+  namespace: monitoring
+
+images:
+  grafana:
+    repository: grafana/grafana
+    tag: 10.0.0
+    pullPolicy: IfNotPresent
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+grafana:
+  secretName: grafana-admin
