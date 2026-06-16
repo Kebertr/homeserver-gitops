@@ -38,6 +38,10 @@ spec:
           mountPath: /var/lib/grafana
         - name: datasources
           mountPath: /etc/grafana/provisioning/datasources
+        - name: dashboards
+          mountPath: /var/lib/grafana/dashboards
+        - name: dashboard-provider
+          mountPath: /etc/grafana/provisioning/dashboards
         resources:
           requests:
             cpu: {{ .Values.resources.requests.cpu }}
@@ -51,3 +55,9 @@ spec:
       - name: datasources
         configMap:
           name: datasources
+      - name: dashboards
+        configMap:
+          name: server-dashboard
+      - name: dashboard-provider
+        configMap:
+          name: dashboard-provider
