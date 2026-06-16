@@ -6,7 +6,7 @@ metadata:
   labels:
     app: grafana
 spec:
-  type: clusterIP
+  type: ClusterIP
   selector:
     app: grafana
   ports:
