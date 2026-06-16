@@ -7,9 +7,9 @@ spec:
   project: default
 
   source:
-    repoURL: oci://ghcr.io/prometheus-community/charts
+    repoURL: https://prometheus-community.github.io/helm-charts
     chart: prometheus-node-exporter
-    targetRevision: 4.49.0
+    targetRevision: 4.55.0
 
   destination:
     server: https://kubernetes.default.svc
