@@ -9,3 +9,6 @@ message: "Frontend Dev Environment"
 image:
   repository: ghcr.io/kebertr/valhall-frontend
   tag: latest
+  pullSecretName: ghcr
+
+redeployAt: ""
