@@ -11,4 +11,4 @@ image:
   tag: latest
   pullSecretName: ghcr
 
-redeployAt: "2026"
+redeployAt: "2026-01"
