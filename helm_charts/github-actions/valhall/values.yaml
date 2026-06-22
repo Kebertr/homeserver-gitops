@@ -1,4 +1,4 @@
-runnerScaleSetName: homeserver-gitops
+runnerScaleSetName: valhall
 
 githubConfigUrl: https://github.com/Kebertr/valhall
 
