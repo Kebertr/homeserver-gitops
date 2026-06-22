@@ -7,3 +7,5 @@ domain: nginx.kebert.se
 image:
   repository: nginx
   tag: latest
+
+redeployAt: "2026-01"
