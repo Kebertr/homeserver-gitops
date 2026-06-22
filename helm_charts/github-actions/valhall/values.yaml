@@ -1,10 +1,10 @@
-runnerScaleSetName: homeserver-gitops
+runnerScaleSetName: valhall
 
 githubConfigUrl: https://github.com/Kebertr/valhall
 
 githubConfigSecret: github-runner-sec
 
-minRunners: 0
+minRunners: 1
 maxRunners: 1
 
 controllerServiceAccount:
