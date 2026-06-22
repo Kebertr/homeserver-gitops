@@ -25,6 +25,9 @@ jobs:
       - name: Helm Lint Github Actions
         run: helm lint helm_charts/github-actions/terraform
 
+      - name: Helm Lint Github Actions
+        run: helm lint helm_charts/github-actions/valhall
+
       - name: Helm Lint MinIO
         run: helm lint helm_charts/minio
 
@@ -45,6 +48,9 @@ jobs:
 
       - name: Helm Render Github Actions
         run: helm template test helm_charts/github-actions/terraform > /dev/null
+
+      - name: Helm Render Github Actions
+        run: helm template test helm_charts/github-actions/valhall > /dev/null
 
       - name: Helm Render MinIO
         run: helm template test helm_charts/minio > /dev/null
