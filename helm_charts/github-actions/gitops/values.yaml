@@ -4,7 +4,7 @@ githubConfigUrl: https://github.com/Kebertr/homeserver-gitops
 
 githubConfigSecret: github-runner-sec
 
-minRunners: 1
+minRunners: 0
 maxRunners: 1
 
 controllerServiceAccount:
