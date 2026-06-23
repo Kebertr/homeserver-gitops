@@ -40,6 +40,9 @@ jobs:
       - name: Helm Lint grafana
         run: helm lint helm_charts/grafana
 
+      - name: Helm Lint postgres
+        run: helm lint helm_charts/database-valhall/bong
+
       - name: Helm Render Cloudflare
         run: helm template test helm_charts/cloudflare > /dev/null
 
@@ -63,6 +66,9 @@ jobs:
 
       - name: Helm Render grafana
         run: helm template test helm_charts/grafana > /dev/null
+
+      - name: Helm Render postgres
+        run: helm template test helm_charts/database-valhall/bong > /dev/null
 
       - name: Success
         run: echo "GitOps validation passed"
