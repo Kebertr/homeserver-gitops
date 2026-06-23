@@ -9,5 +9,3 @@ message: "Frontend Dev Environment"
 image:
   repository: ghcr.io/kebertr/valhall-frontend
   tag: latest
-
-redeployAt: "2026-01"
