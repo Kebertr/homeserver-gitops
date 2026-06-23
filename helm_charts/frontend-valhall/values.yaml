@@ -6,4 +6,4 @@ environment: Development
 message: "Frontend Dev Environment"
 image:
   repository: ghcr.io/kebertr/valhall-frontend
-  tag: build-19
+  tag: build-21
