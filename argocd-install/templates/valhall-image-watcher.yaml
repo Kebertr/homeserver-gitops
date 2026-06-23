@@ -1,0 +1,44 @@
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  name: valhall-watcher
+  namespace: argocd
+spec:
+  commonUpdateSettings:
+    updateStrategy: newest-build
+    allowTags: "regexp:^build-[0-9]+$"
+
+  applicationRefs:
+    - namePattern: frontend
+      images:
+        - alias: frontend
+          imageName: ghcr.io/kebertr/valhall-frontend:latest
+          manifestTargets:
+            helm:
+              name: image.repository
+              tag: image.tag
+      writeBackConfig:
+        method: git:secret:argocd/image-updater-git-creds
+        gitConfig:
+          repository: https://github.com/Kebertr/homeserver-gitops.git
+          branch: main
+          writeBackTarget: helmvalues:/helm_charts/frontend-valhall/values.yaml
+          pullRequest:
+            github: {}
+
+    - namePattern: bong-api
+      images:
+        - alias: bong-api
+          imageName: ghcr.io/kebertr/valhall-bong-api:latest
+          manifestTargets:
+            helm:
+              name: image.repository
+              tag: image.tag
+      writeBackConfig:
+        method: git:secret:argocd/image-updater-git-creds
+        gitConfig:
+          repository: https://github.com/Kebertr/homeserver-gitops.git
+          branch: main
+          writeBackTarget: helmvalues:/helm_charts/backend-valhall/bong-valhall/values.yaml
+          pullRequest:
+            github: {}

@@ -11,12 +11,10 @@ spec:
     metadata:
       labels:
         app: {{ .Values.app.name }}
-      annotations:
-        redeployAt: {{ .Values.redeployAt | quote }}
     spec:
       containers:
       - name: frontend
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3000
