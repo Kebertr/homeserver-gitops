@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: database-dev
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/Kebertr/homeserver-gitops.git
+    targetRevision: main
+    path: helm_charts/database-valhall/bong
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: valhall
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+        - CreateNamespace=true
