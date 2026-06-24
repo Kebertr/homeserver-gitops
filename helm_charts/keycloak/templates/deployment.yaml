@@ -23,7 +23,9 @@ spec:
         - --http-port=8080
         env:
         - name: KC_HOSTNAME
-          value: {{ .Values.domain }}
+          value: {{ .Values.domain | quote}}
+        - name: KC_HOSTNAME_PORT
+          value: "443"
         - name: KC_PROXY_HEADERS
           value: "xforwarded"
         - name: KC_HOSTNAME_STRICT
