@@ -8,7 +8,7 @@ metadata:
     # cert-manager.io/cluster-issuer: letsencrypt-prod
     cert-manager.io/cluster-issuer: letsencrypt-staging
 spec:
-  ingressClassName: traefik
+  ingressClassName: kong
   tls:
   - hosts:
     - {{ .Values.domain }}
@@ -17,13 +17,6 @@ spec:
   - host: {{ .Values.domain }}
     http:
       paths:
-      - path: /api
-        pathType: Prefix
-        backend:
-          service:
-            name: bong-service
-            port:
-              number: 80
       - path: /
         pathType: Prefix
         backend:
