@@ -2,6 +2,11 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: keycloak
+  annotations:
+    cert-manager.io/cluster-issuer: {{ .Values.certIssuer }}
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    ingress.kubernetes.io/forwarded-headers: "true"
 spec:
   ingressClassName: traefik
   rules:
