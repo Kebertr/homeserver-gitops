@@ -32,3 +32,4 @@ postgres:
   StorageClassName: local-path
 
 domain: auth.kebert.se
+certIssuer: letsencrypt-prod
