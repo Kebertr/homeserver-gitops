@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bong-service
+spec:
+  ingressClassName: kong
+  rules:
+    - host: {{ .Values.domain }}
+      http:
+        paths:
+          - path: /api/add
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.app.name }}
+                port:
+                  number: 80
+          - path: /api/redeem
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.app.name }}
+                port:
+                  number: 80
