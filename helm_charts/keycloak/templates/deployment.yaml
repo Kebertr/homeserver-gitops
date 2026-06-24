@@ -23,6 +23,8 @@ spec:
             - --http-port=8080
             - --proxy=edge
             - --hostname-strict=false
+            - --hostname-url=https://{{ .Values.domain }}
+            - --hostname-admin-url=https://{{ .Values.domain }}
         env:
         - name: KC_DB
           value: {{ .Values.keycloak.database.vendor }}
