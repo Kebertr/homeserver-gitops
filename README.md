@@ -47,3 +47,7 @@ To see what privileges each namespace have and with service name we have the com
 ```kubectl auth can-i --list \
 --as=system:serviceaccount:namespace:servicename```
 
+```act pull_request -P homeserver-gitops=catthehacker/ubuntu:act-latest```
+
+kong
+```helm dependency update helm_charts/kong-gateway```

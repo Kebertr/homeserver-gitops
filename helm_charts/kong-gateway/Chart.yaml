@@ -1,0 +1,10 @@
+apiVersion: v2
+name: kong-gateway
+description: Kong Gateway OSS with dedicated PostgreSQL
+type: application
+version: 0.1.0
+
+dependencies:
+  - name: kong
+    version: 3.2.0
+    repository: https://charts.konghq.com
