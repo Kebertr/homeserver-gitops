@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: keycloak
 spec:
-  ingressClassName: tailscale
+  ingressClassName: traefik
   rules:
   - host: {{ .Values.domain }}
     http:
