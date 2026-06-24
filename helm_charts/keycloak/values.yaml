@@ -31,4 +31,4 @@ postgres:
   DBStorage: 10Gi
   StorageClassName: local-path
 
-domain: auth.valhall.kebert.se
+domain: auth.kebert.se
