@@ -46,6 +46,10 @@ jobs:
       - name: Helm Lint bong
         run: helm lint helm_charts/backend-valhall/bong-valhall
 
+      - name: Helm Lint keycloak
+        run: helm lint helm_charts/keycloak
+
+
       - name: Helm Render Cloudflare
         run: helm template test helm_charts/cloudflare > /dev/null
 
@@ -75,6 +79,9 @@ jobs:
 
       - name: Helm Render bong
         run: helm template test helm_charts/backend-valhall/bong-valhall > /dev/null
+
+      - name: Helm Render keycloak
+        run: helm template test helm_charts/keycloak > /dev/null
 
       - name: Success
         run: echo "GitOps validation passed"
