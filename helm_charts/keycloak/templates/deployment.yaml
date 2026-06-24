@@ -18,12 +18,12 @@ spec:
       - name: keycloak
         image: {{ .Values.keycloak.image }}
         args:
-          - start
-          - --http-enabled=true
-          - --http-port=8080
-          - --proxy-headers=xforwarded
-          - --hostname={{ .Values.domain }}
-          - --hostname-admin={{ .Values.domain }}
+            - start
+            - --http-enabled=true
+            - --http-port=8080
+            - --proxy=edge
+            - --hostname={{ .Values.domain }}
+            - --hostname-admin={{ .Values.domain }}
         env:
         - name: KC_DB
           value: {{ .Values.keycloak.database.vendor }}
