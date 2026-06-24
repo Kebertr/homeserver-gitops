@@ -22,8 +22,7 @@ spec:
             - --http-enabled=true
             - --http-port=8080
             - --proxy=edge
-            - --hostname={{ .Values.domain }}
-            - --hostname-admin={{ .Values.domain }}
+            - --hostname-strict=false
         env:
         - name: KC_DB
           value: {{ .Values.keycloak.database.vendor }}
