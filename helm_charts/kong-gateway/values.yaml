@@ -1,0 +1,64 @@
+kong:
+  image:
+    repository: kong
+    tag: "3.9"
+
+  enterprise:
+    enabled: false
+
+  ingressController:
+    enabled: true
+    ingressClass: kong
+    createIngressClass: true
+
+  postgresql:
+    enabled: false
+
+  env:
+    database: postgres
+    pg_host: postgres-service
+    pg_port: "5432"
+    pg_database: kongdb
+    pg_ssl: "off"
+
+    pg_user:
+      valueFrom:
+        secretKeyRef:
+          name: kong-db-credentials
+          key: POSTGRES_USER
+
+    pg_password:
+      valueFrom:
+        secretKeyRef:
+          name: kong-db-credentials
+          key: POSTGRES_PASSWORD
+
+  admin:
+    enabled: false
+
+  manager:
+    enabled: false
+
+  proxy:
+    enabled: true
+    nameOverride: kong-proxy
+    type: ClusterIP
+
+    http:
+      enabled: true
+      servicePort: 80
+      containerPort: 8000
+
+    tls:
+      enabled: false
+
+secrets:
+  database: kong-db-credentials
+
+postgres:
+  DBImage: postgres:16
+  DBResourceLimit: true
+  DBCPU: "500m"
+  DBMemory: "512Mi"
+  DBStorage: 10Gi
+  StorageClassName: local-path
