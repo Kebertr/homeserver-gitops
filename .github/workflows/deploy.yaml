@@ -18,7 +18,10 @@ jobs:
 
       
       - name: Build Kong dependencies
-        run: helm dependency build helm_charts/kong-gateway
+        run:  | 
+          helm repo add kong https://charts.konghq.com
+          helm repo update
+          helm dependency build helm_charts/kong-gateway
 
       - name: Helm Lint Cloudflare
         run: helm lint helm_charts/cloudflare
