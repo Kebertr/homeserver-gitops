@@ -18,18 +18,13 @@ spec:
       - name: keycloak
         image: {{ .Values.keycloak.image }}
         args:
-        - start
-        - --http-enabled=true
-        - --http-port=8080
+          - start
+          - --http-enabled=true
+          - --http-port=8080
+          - --proxy-headers=xforwarded
+          - --hostname={{ .Values.domain }}
+          - --hostname-admin={{ .Values.domain }}
         env:
-        - name: KC_HOSTNAME
-          value: {{ .Values.domain | quote}}
-        - name: KC_PROXY_HEADERS
-          value: "xforwarded"
-        - name: KC_HOSTNAME_STRICT
-          value: "false"
-        - name: KC_HOSTNAME_ADMIN
-          value: {{ .Values.domain | quote }}
         - name: KC_DB
           value: {{ .Values.keycloak.database.vendor }}
         - name: KC_DB_URL
@@ -68,6 +63,9 @@ spec:
         ports:
         - name: http
           containerPort: 8080
+          protocol: TCP
+        - name: management
+          containerPort: 9000
           protocol: TCP
         livenessProbe:
           httpGet:
