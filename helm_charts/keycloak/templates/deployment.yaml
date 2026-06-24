@@ -18,15 +18,16 @@ spec:
       - name: keycloak
         image: {{ .Values.keycloak.image }}
         args:
-        - start-dev
+        - start
         - --http-enabled=true
         - --http-port=8080
-        - --hostname-strict=false
         env:
         - name: KC_HOSTNAME
-          value: "https://auth.kebert.se"
+          value: {{ .Values.domain }}
         - name: KC_PROXY_HEADERS
           value: "xforwarded"
+        - name: KC_HOSTNAME_STRICT
+          value: "false"
         - name: KC_DB
           value: {{ .Values.keycloak.database.vendor }}
         - name: KC_DB_URL
