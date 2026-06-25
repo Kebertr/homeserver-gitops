@@ -11,7 +11,7 @@ data:
     ingress:
       - hostname: valhall.kebert.se
         service: http://kong-proxy.kong.svc.cluster.local:80
-      - hostname: dev.valhall.kebert.se
+      - hostname: dev-valhall.kebert.se
         service: http://kong-proxy.kong.svc.cluster.local:80
       - hostname: {{ .Values.hostname | quote}}
         service: {{ .Values.service.url }}
