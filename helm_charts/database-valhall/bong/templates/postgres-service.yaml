@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: postgres-service
+  name: {{ .Values.app.serviceName }}
   annotations:
-    tailscale.com/hostname: "bong-postgres"
+    tailscale.com/hostname: {{ .Values.app.tailscaleHostname | quote }}
 spec:
   type: LoadBalancer
   loadBalancerClass: tailscale
   selector:
-    app: postgres
+    app: {{ .Values.app.name }}
   ports:
     - name: postgres
       protocol: TCP

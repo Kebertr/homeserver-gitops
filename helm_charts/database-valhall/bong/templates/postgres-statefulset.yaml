@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: StatefulSet 
 metadata:
-  name: postgres-statefulset
+  name: {{ .Values.app.statefulSetName }}
   labels:
-    app: postgres
+    app: {{ .Values.app.name }}
 spec:
-  serviceName: "postgresql-internal"
+  serviceName: {{ .Values.app.internalServiceName | quote }}
   replicas: 1
   selector:
     matchLabels:
-      app: postgres
+      app: {{ .Values.app.name }}
   template:
      metadata:
        labels:
-          app: postgres
+          app: {{ .Values.app.name }}
      spec:
          containers:
            - name: postgres
@@ -23,7 +23,7 @@ spec:
                - containerPort: 5432
              envFrom:
                 - configMapRef:
-                    name: postgres-config
+                    name: {{ .Values.app.configMapName }}
                 - secretRef:
                     name: {{ .Values.DBSecretName | quote }}
              volumeMounts:
@@ -47,4 +47,3 @@ spec:
           resources:
             requests:
               storage: {{ .Values.DBStorage }}
-          

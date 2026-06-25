@@ -1,0 +1,11 @@
+app:
+  name: frontend
+  replicas: 1
+domain: valhall.kebert.se
+environment: Production
+message: "Frontend Prod Environment"
+image:
+  repository: ghcr.io/kebertr/valhall-frontend
+  tag: build-12
+api:
+  serviceName: bong-service

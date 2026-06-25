@@ -1,9 +1,11 @@
 app:
   name: frontend
   replicas: 1
-domain: valhall.kebert.se
+domain: dev.valhall.kebert.se
 environment: Development
 message: "Frontend Dev Environment"
 image:
   repository: ghcr.io/kebertr/valhall-frontend
   tag: build-21
+api:
+  serviceName: bong-service

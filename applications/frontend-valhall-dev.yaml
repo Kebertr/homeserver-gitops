@@ -1,22 +1,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: frontend-valhall
+  name: frontend-valhall-dev
   namespace: argocd
 spec:
   project: default
 
   source:
     repoURL: https://github.com/Kebertr/homeserver-gitops.git
-    targetRevision: main
+    targetRevision: dev
     path: helm_charts/frontend-valhall
     helm:
       valueFiles:
-        - values-prod.yaml
+        - values-dev.yaml
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: valhall
+    namespace: valhall-dev
 
   syncPolicy:
     automated:

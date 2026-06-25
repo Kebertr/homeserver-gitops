@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: postgres-config
+  name: {{ .Values.app.configMapName }}
   labels:
-    app: postgres
+    app: {{ .Values.app.name }}
 data:
   PGDATA: /var/lib/postgresql/data
   TZ: {{ .Values.Timezone | quote }}

@@ -10,6 +10,9 @@ spec:
     repoURL: https://github.com/Kebertr/homeserver-gitops.git
     targetRevision: main
     path: helm_charts/backend-valhall/bong-valhall
+    helm:
+      valueFiles:
+        - values-prod.yaml
 
   destination:
     server: https://kubernetes.default.svc
