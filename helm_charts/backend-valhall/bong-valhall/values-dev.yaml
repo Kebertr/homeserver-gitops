@@ -3,12 +3,11 @@ app:
   replicas: 1
   port: 3001
 
-domain: valhall.kebert.se
+domain: dev.valhall.kebert.se
 
 image:
   repository: ghcr.io/kebertr/valhall-bong-api
   tag: latest
-
 
 database:
   host: postgres-service

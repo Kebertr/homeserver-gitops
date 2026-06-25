@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: bong-api
+  name: bong-api-dev
   namespace: argocd
 spec:
   project: default
@@ -12,11 +12,11 @@ spec:
     path: helm_charts/backend-valhall/bong-valhall
     helm:
       valueFiles:
-        - values-prod.yaml
+        - values-dev.yaml
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: valhall
+    namespace: valhall-dev
 
   syncPolicy:
     automated:

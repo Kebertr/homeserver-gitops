@@ -7,3 +7,5 @@ message: "Frontend Prod Environment"
 image:
   repository: ghcr.io/kebertr/valhall-frontend
   tag: build-12
+api:
+  serviceName: bong-service

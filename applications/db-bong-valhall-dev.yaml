@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: bong-api
+  name: database-dev
   namespace: argocd
 spec:
   project: default
@@ -9,14 +9,14 @@ spec:
   source:
     repoURL: https://github.com/Kebertr/homeserver-gitops.git
     targetRevision: main
-    path: helm_charts/backend-valhall/bong-valhall
+    path: helm_charts/database-valhall/bong
     helm:
       valueFiles:
-        - values-prod.yaml
+        - values-dev.yaml
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: valhall
+    namespace: valhall-dev
 
   syncPolicy:
     automated:

@@ -21,7 +21,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: bong-service
+            name: {{ .Values.api.serviceName }}
             port:
               number: 80
       - path: /
