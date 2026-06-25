@@ -1,7 +1,7 @@
 app:
   name: frontend
   replicas: 1
-domain: dev.valhall.kebert.se
+domain: dev-valhall.kebert.se
 environment: Development
 message: "Frontend Dev Environment"
 image:
