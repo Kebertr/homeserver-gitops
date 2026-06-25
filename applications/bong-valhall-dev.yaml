@@ -8,7 +8,7 @@ spec:
 
   source:
     repoURL: https://github.com/Kebertr/homeserver-gitops.git
-    targetRevision: main
+    targetRevision: dev
     path: helm_charts/backend-valhall/bong-valhall
     helm:
       valueFiles:
