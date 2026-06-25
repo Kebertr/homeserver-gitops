@@ -43,8 +43,6 @@ spec:
           repository: https://github.com/Kebertr/homeserver-gitops.git
           branch: dev
           writeBackTarget: helmvalues:/helm_charts/frontend-valhall/values-dev.yaml
-          pullRequest:
-            github: {}
 
     - namePattern: bong-api
       images:
@@ -81,5 +79,3 @@ spec:
           repository: https://github.com/Kebertr/homeserver-gitops.git
           branch: dev
           writeBackTarget: helmvalues:/helm_charts/backend-valhall/bong-valhall/values-dev.yaml
-          pullRequest:
-            github: {}
