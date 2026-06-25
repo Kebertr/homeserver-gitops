@@ -1,0 +1,34 @@
+# Keycloak Configuration
+keycloak:
+  replicas: 1
+  image: quay.io/keycloak/keycloak:23.0
+
+  # Database configuration
+  database:
+    vendor: postgres
+    host: postgres-service
+    port: 5432
+    database: keycloakdb
+
+  # Resource limits (optional)
+  resources:
+    limits:
+      cpu: 500m
+      memory: 1Gi
+    requests:
+      cpu: 100m
+      memory: 256Mi
+
+secrets:
+  admin: keycloak-admin-credentials
+  database: keycloak-db-credentials
+
+postgres:
+  DBImage: postgres:16
+  DBResourceLimit: true
+  DBCPU: "500m"
+  DBMemory: "512Mi"
+  DBStorage: 10Gi
+  StorageClassName: local-path
+
+domain: auth.kebert.se

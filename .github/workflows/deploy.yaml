@@ -16,6 +16,13 @@ jobs:
         run: |
           curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
+      
+      - name: Build Kong dependencies
+        run:  | 
+          helm repo add kong https://charts.konghq.com
+          helm repo update
+          helm dependency build helm_charts/kong-gateway
+
       - name: Helm Lint Cloudflare
         run: helm lint helm_charts/cloudflare
 
@@ -46,6 +53,12 @@ jobs:
       - name: Helm Lint bong
         run: helm lint helm_charts/backend-valhall/bong-valhall
 
+      - name: Helm Lint keycloak
+        run: helm lint helm_charts/keycloak
+
+      - name: Helm Lint kong
+        run: helm lint helm_charts/kong-gateway
+
       - name: Helm Render Cloudflare
         run: helm template test helm_charts/cloudflare > /dev/null
 
@@ -75,6 +88,12 @@ jobs:
 
       - name: Helm Render bong
         run: helm template test helm_charts/backend-valhall/bong-valhall > /dev/null
+
+      - name: Helm Render keycloak
+        run: helm template test helm_charts/keycloak > /dev/null
+
+      - name: Helm Render kong
+        run: helm template test helm_charts/kong-gateway > /dev/null
 
       - name: Success
         run: echo "GitOps validation passed"
