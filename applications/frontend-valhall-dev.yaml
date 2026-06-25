@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: frontend-valhall
+  name: frontend-valhall-dev
   namespace: argocd
 spec:
   project: default
@@ -12,7 +12,7 @@ spec:
     path: helm_charts/frontend-valhall
     helm:
       valueFiles:
-        - values-prod.yaml
+        - values-dev.yaml
 
   destination:
     server: https://kubernetes.default.svc

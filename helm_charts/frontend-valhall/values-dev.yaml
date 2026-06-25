@@ -1,0 +1,9 @@
+app:
+  name: frontend-dev
+  replicas: 1
+domain: dev.valhall.kebert.se
+environment: Development
+message: "Frontend Dev Environment"
+image:
+  repository: ghcr.io/kebertr/valhall-frontend
+  tag: build-12
