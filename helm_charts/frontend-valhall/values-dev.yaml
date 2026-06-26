@@ -6,11 +6,6 @@ environment: Development
 message: "Frontend Dev Environment"
 image:
   repository: ghcr.io/kebertr/valhall-frontend
-  tag: build-21
+  tag: dev-014d129
 api:
   serviceName: bong-service
-frontend:
-  config:
-    keycloakUrl: "https://auth.kebert.se"
-    keycloakRealm: "valhall"
-    keycloakClientId: "valhall-frontend-dev"

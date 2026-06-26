@@ -10,3 +10,7 @@ database:
   host: postgres-service
   port: 5432
   secretName: postgres-credentials
+
+migration:
+  enabled: true
+  command: "npx prisma migrate deploy"

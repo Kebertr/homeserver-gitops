@@ -16,12 +16,5 @@ spec:
       - name: frontend
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: IfNotPresent
-        env:
-        - name: VITE_KEYCLOAK_URL
-          value: {{ .Values.frontend.config.keycloakUrl | quote }}
-        - name: VITE_KEYCLOAK_REALM
-          value: {{ .Values.frontend.config.keycloakRealm | quote }}
-        - name: VITE_KEYCLOAK_CLIENT_ID
-          value: {{ .Values.frontend.config.keycloakClientId | quote }}
         ports:
         - containerPort: 5173
