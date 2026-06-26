@@ -7,7 +7,7 @@ domain: dev-valhall.kebert.se
 
 image:
   repository: ghcr.io/kebertr/valhall-bong-api
-  tag: latest
+  tag: build-19
 
 database:
   host: postgres-service
