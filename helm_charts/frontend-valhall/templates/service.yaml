@@ -8,5 +8,5 @@ spec:
     app: {{ .Values.app.name }}
   ports:
   - port: 80
-    targetPort: 3000
+    targetPort: 5173
   type: ClusterIP

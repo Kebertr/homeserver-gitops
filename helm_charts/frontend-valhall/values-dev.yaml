@@ -9,3 +9,8 @@ image:
   tag: build-21
 api:
   serviceName: bong-service
+frontend:
+  config:
+    keycloakUrl: "https://auth.kebert.se"
+    keycloakRealm: "valhall"
+    keycloakClientId: "valhall-frontend-dev"
