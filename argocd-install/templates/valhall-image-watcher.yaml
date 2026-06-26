@@ -13,6 +13,7 @@ spec:
         - alias: frontend
           imageName: ghcr.io/kebertr/valhall-frontend:latest
           commonUpdateSettings:
+            updateStrategy: newest-build
             allowTags: "regexp:^prod-.+$"
           manifestTargets:
             helm:
@@ -32,6 +33,7 @@ spec:
         - alias: frontend
           imageName: ghcr.io/kebertr/valhall-frontend:latest
           commonUpdateSettings:
+            updateStrategy: newest-build
             allowTags: "regexp:^dev-.+$"
           manifestTargets:
             helm:
@@ -49,6 +51,7 @@ spec:
         - alias: bong-api
           imageName: ghcr.io/kebertr/valhall-bong-api:latest
           commonUpdateSettings:
+            updateStrategy: newest-build
             allowTags: "regexp:^prod-.+$"
           manifestTargets:
             helm:
@@ -68,6 +71,7 @@ spec:
         - alias: bong-api
           imageName: ghcr.io/kebertr/valhall-bong-api:latest
           commonUpdateSettings:
+            updateStrategy: newest-build
             allowTags: "regexp:^dev-.+$"
           manifestTargets:
             helm:
