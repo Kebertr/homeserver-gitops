@@ -10,9 +10,9 @@ image:
   tag: build-19
 
 database:
-  host: postgres-service
+  host: bong-postgres-service
   port: 5432
-  secretName: postgres-credentials
+  secretName: bong-postgres-credentials
 
 migration:
   enabled: true

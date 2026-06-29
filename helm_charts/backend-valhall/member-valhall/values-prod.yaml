@@ -5,11 +5,11 @@ app:
 domain: valhall.kebert.se
 image:
   repository: ghcr.io/kebertr/valhall-member-api
-  tag: build-19
+  tag: dev-4d2dae0
 database:
-  host: postgres-service
+  host: member-postgres-service
   port: 5432
-  secretName: postgres-credentials
+  secretName: member-postgres-credentials
 
 migration:
   enabled: true
