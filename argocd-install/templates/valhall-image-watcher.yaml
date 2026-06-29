@@ -83,3 +83,41 @@ spec:
           repository: https://github.com/Kebertr/homeserver-gitops.git
           branch: dev
           writeBackTarget: helmvalues:/helm_charts/backend-valhall/bong-valhall/values-dev.yaml
+
+    - namePattern: member-api
+      images:
+        - alias: member-api
+          imageName: ghcr.io/kebertr/valhall-member-api:latest
+          commonUpdateSettings:
+            updateStrategy: newest-build
+            allowTags: "regexp:^prod-.+$"
+          manifestTargets:
+            helm:
+              name: image.repository
+              tag: image.tag
+      writeBackConfig:
+        method: git:secret:argocd/image-updater-git-creds
+        gitConfig:
+          repository: https://github.com/Kebertr/homeserver-gitops.git
+          branch: main
+          writeBackTarget: helmvalues:/helm_charts/backend-valhall/member-valhall/values-prod.yaml
+          pullRequest:
+            github: {}
+
+    - namePattern: member-api-dev
+      images:
+        - alias: member-api
+          imageName: ghcr.io/kebertr/valhall-member-api:latest
+          commonUpdateSettings:
+            updateStrategy: newest-build
+            allowTags: "regexp:^dev-.+$"
+          manifestTargets:
+            helm:
+              name: image.repository
+              tag: image.tag
+      writeBackConfig:
+        method: git:secret:argocd/image-updater-git-creds
+        gitConfig:
+          repository: https://github.com/Kebertr/homeserver-gitops.git
+          branch: dev
+          writeBackTarget: helmvalues:/helm_charts/backend-valhall/member-valhall/values-dev.yaml
