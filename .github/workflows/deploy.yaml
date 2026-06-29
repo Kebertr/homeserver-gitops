@@ -53,11 +53,23 @@ jobs:
       - name: Helm Lint postgres dev
         run: helm lint helm_charts/database-valhall/bong -f helm_charts/database-valhall/bong/values-dev.yaml
 
+      - name: Helm Lint member postgres
+        run: helm lint helm_charts/database-valhall/member -f helm_charts/database-valhall/member/values-prod.yaml
+
+      - name: Helm Lint member postgres dev
+        run: helm lint helm_charts/database-valhall/member -f helm_charts/database-valhall/member/values-dev.yaml
+
       - name: Helm Lint bong
         run: helm lint helm_charts/backend-valhall/bong-valhall -f helm_charts/backend-valhall/bong-valhall/values-prod.yaml
 
       - name: Helm Lint bong dev
         run: helm lint helm_charts/backend-valhall/bong-valhall -f helm_charts/backend-valhall/bong-valhall/values-dev.yaml
+
+      - name: Helm Lint member
+        run: helm lint helm_charts/backend-valhall/member-valhall -f helm_charts/backend-valhall/member-valhall/values-prod.yaml
+
+      - name: Helm Lint member dev
+        run: helm lint helm_charts/backend-valhall/member-valhall -f helm_charts/backend-valhall/member-valhall/values-dev.yaml
 
       - name: Helm Lint frontend
         run: helm lint helm_charts/frontend-valhall -f helm_charts/frontend-valhall/values-prod.yaml
@@ -101,11 +113,23 @@ jobs:
       - name: Helm Render postgres dev
         run: helm template test helm_charts/database-valhall/bong -f helm_charts/database-valhall/bong/values-dev.yaml > /dev/null
 
+      - name: Helm Render member postgres
+        run: helm template test helm_charts/database-valhall/member -f helm_charts/database-valhall/member/values-prod.yaml > /dev/null
+
+      - name: Helm Render member postgres dev
+        run: helm template test helm_charts/database-valhall/member -f helm_charts/database-valhall/member/values-dev.yaml > /dev/null
+
       - name: Helm Render bong
         run: helm template test helm_charts/backend-valhall/bong-valhall -f helm_charts/backend-valhall/bong-valhall/values-prod.yaml > /dev/null
 
       - name: Helm Render bong dev
         run: helm template test helm_charts/backend-valhall/bong-valhall -f helm_charts/backend-valhall/bong-valhall/values-dev.yaml > /dev/null
+
+      - name: Helm Render member
+        run: helm template test helm_charts/backend-valhall/member-valhall -f helm_charts/backend-valhall/member-valhall/values-prod.yaml > /dev/null
+
+      - name: Helm Render member dev
+        run: helm template test helm_charts/backend-valhall/member-valhall -f helm_charts/backend-valhall/member-valhall/values-dev.yaml > /dev/null
 
       - name: Helm Render frontend
         run: helm template test helm_charts/frontend-valhall -f helm_charts/frontend-valhall/values-prod.yaml > /dev/null

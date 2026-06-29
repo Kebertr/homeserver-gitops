@@ -1,31 +1,26 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
-
 metadata:
-  name: root
+  name: database-member-dev
   namespace: argocd
-# This finalizer is required to prevent the application from being deleted before its child applications are deleted
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
-
 spec:
   project: default
 
   source:
     repoURL: https://github.com/Kebertr/homeserver-gitops.git
-    targetRevision: main
-    path: applications
-    directory:
-      recurse: true
+    targetRevision: dev
+    path: helm_charts/database-valhall/member
+    helm:
+      valueFiles:
+        - values-dev.yaml
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: valhall-dev
 
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-
     syncOptions:
       - CreateNamespace=true

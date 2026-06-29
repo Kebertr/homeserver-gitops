@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: StatefulSet 
+metadata:
+  name: {{ .Values.app.statefulSetName }}
+  labels:
+    app: {{ .Values.app.name }}
+spec:
+  serviceName: {{ .Values.app.internalServiceName | quote }}
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}
+  template:
+     metadata:
+       labels:
+          app: {{ .Values.app.name }}
+     spec:
+         containers:
+           - name: postgres
+             image: {{ (.Values.DBImage) }} 
+             imagePullPolicy: "IfNotPresent"
+             ports:
+               - containerPort: 5432
+             envFrom:
+                - configMapRef:
+                    name: {{ .Values.app.configMapName }}
+                - secretRef:
+                    name: {{ .Values.DBSecretName | quote }}
+             volumeMounts:
+               - mountPath: /var/lib/postgresql/data
+                 name: postgresdb
+             {{ if .Values.DBResourceLimit }}
+             resources:
+                limits:
+                  memory: {{ (.Values.DBMemory | quote) }}
+                requests:
+                  cpu: {{ (.Values.DBCPU | quote) }}
+                  memory: {{ (.Values.DBMemory | quote) }}
+             {{ end }}
+  volumeClaimTemplates:
+      - metadata:
+          name: postgresdb
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          storageClassName: {{ .Values.StorageClassName }}
+          resources:
+            requests:
+              storage: {{ .Values.DBStorage }}

@@ -1,0 +1,6 @@
+# Chart.yaml
+apiVersion: v2
+name: member-service
+description: gitops for member service
+version: 1.0.0
+appVersion: "1.0"
