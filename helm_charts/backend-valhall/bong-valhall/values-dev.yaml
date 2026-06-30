@@ -2,18 +2,14 @@ app:
   name: bong-service
   replicas: 1
   port: 3001
-
 domain: dev-valhall.kebert.se
-
 image:
   repository: ghcr.io/kebertr/valhall-bong-api
-  tag: build-19
-
+  tag: dev-cc6ce0b
 database:
   host: bong-postgres-service
   port: 5432
   secretName: bong-postgres-credentials
-
 migration:
   enabled: true
   command: "npx prisma migrate deploy"
