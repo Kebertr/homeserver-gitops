@@ -10,6 +10,10 @@ database:
   host: member-postgres-service
   port: 5432
   secretName: member-postgres-credentials
+keycloak:
+  url: https://auth.kebert.se
+  realm: valhall
+  clientId: valhall-api-dev
 migration:
   enabled: true
   command: "npx prisma migrate deploy"
