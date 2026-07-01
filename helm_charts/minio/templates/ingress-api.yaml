@@ -1,15 +1,29 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: minio-api-tailscale
+  name: minio-api-kong
   namespace: minio
   annotations:
-    tailscale.com/hostname: "ingress-api"
+    konghq.com/preserve-host: "true"
+    konghq.com/strip-path: "false"
+    konghq.com/request-buffering: "false"
+    konghq.com/response-buffering: "false"
 spec:
-  ingressClassName: tailscale
+  ingressClassName: kong
 
-  defaultBackend:
-    service:
-      name: minio-service
-      port:
-        number: 9000
+  tls:
+    - hosts:
+        - {{ .Values.MinioApiDomain | quote }}
+      secretName: {{ .Values.MinioApiTlsSecret }}
+
+  rules:
+    - host: {{ .Values.MinioApiDomain | quote }}
+      http:
+        paths:
+          - path: "/{{ .Values.MinioPublicBucket }}"
+            pathType: Prefix
+            backend:
+              service:
+                name: minio-service
+                port:
+                  name: api

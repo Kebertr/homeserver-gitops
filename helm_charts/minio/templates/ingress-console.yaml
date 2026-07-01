@@ -4,7 +4,7 @@ metadata:
   name: minio-console-tailscale
   namespace: minio
   annotations:
-    tailscale.com/hostname: "ingress-console"
+    tailscale.com/hostname: {{ .Values.MinioConsoleHostname | quote }}
 spec:
   ingressClassName: tailscale
 
