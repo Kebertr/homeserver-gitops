@@ -4,6 +4,7 @@ metadata:
   name: minio-api-kong
   namespace: minio
   annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     konghq.com/preserve-host: "true"
     konghq.com/strip-path: "false"
     konghq.com/request-buffering: "false"
