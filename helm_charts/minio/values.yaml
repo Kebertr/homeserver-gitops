@@ -10,8 +10,8 @@ MinioResourceLimit: true
 MinioCPU: "1000m"
 MinioMemory: "1000Mi"
 
-MinioApiDomain: "uploads.kebert.se"
-MinioApiTlsSecret: "uploads-kebert-se-tls"
+MinioApiDomain: "upload.kebert.se"
+MinioApiTlsSecret: "upload-kebert-se-tls"
 MinioPublicBucket: "valhall-redemptions"
 
 MinioConsoleHostname: "minio-console"
