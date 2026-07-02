@@ -1,8 +1,29 @@
 # homeserver-gitops
 Gitops for the applicatiions in my homeserver
 
-When added a new application. Run
-```kubectl apply -f applications/[name].yaml```
+## App of Apps
+
+This repository uses Argo CD's **App of Apps** pattern. The root application is
+defined in `root-application/root.yaml` and watches the `applications/`
+directory recursively.
+
+The files inside `applications/` are child Argo CD Applications for services
+such as Cloudflare, Kong, Tailscale, MinIO, monitoring, GitHub Actions runners,
+and the development and production Valhall environments.
+
+After Argo CD has been installed, bootstrap all child applications by applying
+the root application:
+
+```bash
+kubectl apply -f root-application/root.yaml
+```
+
+Argo CD then creates and synchronizes the child Applications automatically. It
+also self-heals changes made directly in the cluster and prunes resources that
+are removed from Git.
+
+To add another application, place its Application manifest in `applications/`
+and push it to Git. The root application will discover it automatically.
 
 argocd:
 create namespace and install
