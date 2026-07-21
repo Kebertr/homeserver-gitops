@@ -6,6 +6,6 @@ environment: Development
 message: "Frontend Dev Environment"
 image:
   repository: ghcr.io/kebertr/valhall-frontend
-  tag: dev-e721ef0
+  tag: dev-e1f5c86
 api:
   serviceName: bong-service
