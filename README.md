@@ -119,10 +119,23 @@ kubectl apply -f applications/<application>.yaml
 For example:
 
 ```bash
-kubectl apply -f applications/minio-app.yaml
+kubectl apply -f root-application/root.yaml
 ```
 
+That should start all other applications
+
 Argo CD will then render the configured Helm chart and reconcile its resources.
+
+```kubectl apply -f secrets/tailscale.yaml```
+
+For tailscale
+
+```kubectl -n argocd get secret argocd-initial-admin-secret \
+  -o jsonpath="{.data.password}" | base64 -d
+echo
+```
+
+Get the password for argo
 
 ## Helm charts
 
@@ -168,6 +181,13 @@ Private console    -> Tailscale -> MinIO console
 The public route should only expose the bucket or path required for application uploads. The Terraform state bucket should remain reachable only through the private endpoint.
 
 ## Secrets
+
+```kubectl create secret generic bong-postgres-credentials \
+  --from-env-file=secrets/bong-postgres.env \
+  -n valhall```
+
+  to add the env files
+
 
 Secrets should not be committed to this repository.
 

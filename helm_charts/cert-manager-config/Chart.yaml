@@ -1,0 +1,4 @@
+apiVersion: v2
+name: cert-manager-config
+description: Cluster-wide certificate issuers
+version: 1.0.0
