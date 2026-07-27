@@ -7,7 +7,7 @@ spec:
   acme:
     # Production endpoint
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: admin@example.com
+    email: rasmus.kebert@gmail.com
     privateKeySecretRef:
       name: letsencrypt-prod-account-key
     solvers:
