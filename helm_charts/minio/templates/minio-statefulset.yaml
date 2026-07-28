@@ -15,7 +15,13 @@ spec:
        labels:
           app: minio
      spec:
-         containers:
+        volumes:
+          - name: miniodb
+            hostPath:
+              path: /mnt/valhall-media/minio
+              type: Directory
+
+        containers:
            - name: minio
              image: {{ (.Values.MinioImage) }}:{{ (.Values.MinioTag) }} 
              imagePullPolicy: "IfNotPresent"
@@ -41,13 +47,3 @@ spec:
                   cpu: {{ (.Values.MinioCPU | quote) }}
                   memory: {{ (.Values.MinioMemory | quote) }}
              {{ end }}
-  volumeClaimTemplates:
-      - metadata:
-          name: miniodb
-        spec:
-          accessModes:
-            - ReadWriteOnce
-          storageClassName: {{ .Values.StorageClassName }}
-          resources:
-            requests:
-              storage: {{ .Values.MinioStorage }}
