@@ -4,15 +4,14 @@ Timezone: "Europe/Stockholm"
 MinioImage: quay.io/minio/minio
 MinioTag: latest
 
-MinioStorage: 20Gi
-
 MinioResourceLimit: true
 MinioCPU: "1000m"
 MinioMemory: "1000Mi"
 
 MinioApiDomain: "upload.kebert.se"
 MinioApiTlsSecret: "upload-kebert-se-tls"
-MinioPublicBucket: "valhall-redemptions"
+MinioPublicBucketProd: "valhall-videos"
+MinioPublicBucketDev: "valhall-videos-dev"
 
 MinioApiTailscaleHostname: "minio-api"
 MinioConsoleHostname: "minio-console"
