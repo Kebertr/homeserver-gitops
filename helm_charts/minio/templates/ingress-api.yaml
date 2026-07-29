@@ -21,7 +21,7 @@ spec:
     - host: {{ .Values.MinioApiDomain | quote }}
       http:
         paths:
-          - path: "/{{ .Values.MinioPublicBucketProd }}"
+          - path: "/{{ .Values.MinioPublicBucketProd | quote }}"
             pathType: Prefix
             backend:
               service:
@@ -29,7 +29,23 @@ spec:
                 port:
                   name: api
                 
-          - path: "/{{ .Values.MinioPublicBucketDev }}"
+          - path: "/{{ .Values.MinioPublicBucketDev | quote }}"
+            pathType: Prefix
+            backend:
+              service:
+                name: minio-service
+                port:
+                  name: api
+
+          - path: "/{{ .Values.MinioProfileBucketProd | quote }}"
+            pathType: Prefix
+            backend:
+              service:
+                name: minio-service
+                port:
+                  name: api
+                
+          - path: "/{{ .Values.MinioProfileBucketDev | quote }}"
             pathType: Prefix
             backend:
               service:
