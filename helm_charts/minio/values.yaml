@@ -12,6 +12,8 @@ MinioApiDomain: "upload.kebert.se"
 MinioApiTlsSecret: "upload-kebert-se-tls"
 MinioPublicBucketProd: "valhall-videos"
 MinioPublicBucketDev: "valhall-videos-dev"
+MinioProfileBucketProd: "valhall-profiles"
+MinioProfileBucketDev: "valhall-profiles-dev"
 
 MinioApiTailscaleHostname: "minio-api"
 MinioConsoleHostname: "minio-console"

@@ -36,3 +36,19 @@ spec:
                 name: minio-service
                 port:
                   name: api
+
+          - path: "/{{ .Values.MinioProfileBucketProd }}"
+            pathType: Prefix
+            backend:
+              service:
+                name: minio-service
+                port:
+                  name: api
+                
+          - path: "/{{ .Values.MinioProfileBucketDev }}"
+            pathType: Prefix
+            backend:
+              service:
+                name: minio-service
+                port:
+                  name: api
