@@ -51,3 +51,9 @@ To see what privileges each namespace have and with service name we have the com
 
 kong
 ```helm dependency update helm_charts/kong-gateway```
+
+To see argocd password for admin
+```kubectl -n argocd get secret argocd-initial-admin-secret \
+  -o jsonpath='{.data.password}' | base64 --decode
+echo
+```
