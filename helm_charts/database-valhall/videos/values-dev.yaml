@@ -1,0 +1,17 @@
+app:
+  name: bong-postgres
+  statefulSetName: bong-postgres-statefulset
+  serviceName: bong-postgres-service
+  internalServiceName: bong-postgresql-internal
+  configMapName: bong-postgres-config
+  tailscaleHostname: bong-postgres-dev
+
+StorageClassName: local-path
+Timezone: "Europe/Stockholm"
+
+DBSecretName: bong-postgres-credentials
+DBImage: postgres:16
+DBResourceLimit: true
+DBCPU: "1000m"
+DBMemory: "1000Mi"
+DBStorage: 10Gi
