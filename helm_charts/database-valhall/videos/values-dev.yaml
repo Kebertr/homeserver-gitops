@@ -1,15 +1,15 @@
 app:
-  name: bong-postgres
-  statefulSetName: bong-postgres-statefulset
-  serviceName: bong-postgres-service
-  internalServiceName: bong-postgresql-internal
-  configMapName: bong-postgres-config
-  tailscaleHostname: bong-postgres-dev
+  name: video-postgres
+  statefulSetName: video-postgres-statefulset
+  serviceName: video-postgres-service
+  internalServiceName: video-postgresql-internal
+  configMapName: video-postgres-config
+  tailscaleHostname: video-postgres-dev
 
 StorageClassName: local-path
 Timezone: "Europe/Stockholm"
 
-DBSecretName: bong-postgres-credentials
+DBSecretName: video-postgres-credentials
 DBImage: postgres:16
 DBResourceLimit: true
 DBCPU: "1000m"
