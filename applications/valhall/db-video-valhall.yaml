@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/Kebertr/homeserver-gitops.git
     targetRevision: main
-    path: helm_charts/database-valhall/video
+    path: helm_charts/database-valhall/videos
     helm:
       valueFiles:
         - values-prod.yaml
