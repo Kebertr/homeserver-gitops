@@ -121,3 +121,41 @@ spec:
           repository: https://github.com/Kebertr/homeserver-gitops.git
           branch: dev
           writeBackTarget: helmvalues:/helm_charts/backend-valhall/member-valhall/values-dev.yaml
+
+    - namePattern: video-api
+      images:
+        - alias: video-api
+          imageName: ghcr.io/kebertr/valhall-video-api:latest
+          commonUpdateSettings:
+            updateStrategy: newest-build
+            allowTags: "regexp:^prod-.+$"
+          manifestTargets:
+            helm:
+              name: image.repository
+              tag: image.tag
+      writeBackConfig:
+        method: git:secret:argocd/image-updater-git-creds
+        gitConfig:
+          repository: https://github.com/Kebertr/homeserver-gitops.git
+          branch: main
+          writeBackTarget: helmvalues:/helm_charts/backend-valhall/video-valhall/values-prod.yaml
+          pullRequest:
+            github: {}
+
+    - namePattern: video-api-dev
+      images:
+        - alias: video-api
+          imageName: ghcr.io/kebertr/valhall-video-api:latest
+          commonUpdateSettings:
+            updateStrategy: newest-build
+            allowTags: "regexp:^dev-.+$"
+          manifestTargets:
+            helm:
+              name: image.repository
+              tag: image.tag
+      writeBackConfig:
+        method: git:secret:argocd/image-updater-git-creds
+        gitConfig:
+          repository: https://github.com/Kebertr/homeserver-gitops.git
+          branch: dev
+          writeBackTarget: helmvalues:/helm_charts/backend-valhall/video-valhall/values-dev.yaml
