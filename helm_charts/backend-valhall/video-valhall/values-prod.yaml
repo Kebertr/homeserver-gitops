@@ -15,9 +15,9 @@ migration:
   enabled: true
   command: "pnpm --filter videos-api exec prisma migrate deploy"
 minio:
-  endpoint: minio-service.minio.svc.cluster.local
-  port: 9000
-  useSSL: "false"
+  endpoint: upload.kebert.se
+  port: 443
+  useSSL: "true"
   bucket: valhall-videos
   secretName: video-minio-credentials
 keycloak:
