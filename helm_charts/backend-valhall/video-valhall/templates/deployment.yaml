@@ -61,3 +61,9 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.minio.secretName | quote }}
                   key: MINIO_SECRET_KEY
+            - name: KEYCLOAK_URL
+              value: {{ .Values.keycloak.url | quote }}
+            - name: KEYCLOAK_REALM
+              value: {{ .Values.keycloak.realm | quote }}
+            - name: KEYCLOAK_CLIENT_ID
+              value: {{ .Values.keycloak.clientId | quote }}

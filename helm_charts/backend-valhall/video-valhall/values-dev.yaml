@@ -19,3 +19,7 @@ minio:
   useSSL: "false"
   bucket: valhall-videos-dev
   secretName: video-minio-credentials-dev
+keycloak:
+  url: https://auth.kebert.se
+  realm: valhall
+  clientId: valhall-api-dev

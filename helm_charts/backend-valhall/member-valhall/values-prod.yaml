@@ -17,3 +17,7 @@ keycloak:
 migration:
   enabled: true
   command: "pnpm --filter member-api exec prisma migrate deploy"
+keycloak:
+  url: https://auth.kebert.se
+  realm: valhall
+  clientId: valhall-api
