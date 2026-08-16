@@ -20,7 +20,6 @@ spec:
             - name: http
               containerPort: {{ .Values.app.port }}
             - name: grpc
-              port: {{ .Values.grpc.port }}
               containerPort: {{ .Values.grpc.port }}
           env:
             - name: PORT
