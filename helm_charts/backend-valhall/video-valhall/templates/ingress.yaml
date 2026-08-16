@@ -15,3 +15,11 @@ spec:
                 name: {{ .Values.app.name }}
                 port:
                   number: 80
+
+          - path: /api/files
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.app.name }}
+                port:
+                  number: 80
