@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: video-service
+spec:
+  ingressClassName: kong
+  rules:
+    - host: {{ .Values.domain }}
+      http:
+        paths:
+          - path: /api/video
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.app.name }}
+                port:
+                  number: 80

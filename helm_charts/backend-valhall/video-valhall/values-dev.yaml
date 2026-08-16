@@ -1,0 +1,15 @@
+app:
+  name: video-service
+  replicas: 1
+  port: 3003
+domain: dev-valhall.kebert.se
+image:
+  repository: ghcr.io/kebertr/valhall-video-api
+  tag: dev-e721ef0
+database:
+  host: video-postgres-service
+  port: 5432
+  secretName: video-postgres-credentials
+migration:
+  enabled: true
+  command: "npx prisma migrate deploy"
