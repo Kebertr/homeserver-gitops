@@ -49,7 +49,7 @@ spec:
               value: {{ .Values.minio.port | quote }}
             - name: MINIO_USE_SSL
               value: {{ .Values.minio.useSSL | quote }}
-            - name: MINIO_BUCKET
+            - name: MINIO_VIDEO_BUCKET
               value: {{ .Values.minio.bucket | quote }}
             - name: MINIO_ACCESS_KEY
               valueFrom:
