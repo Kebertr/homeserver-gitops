@@ -12,4 +12,4 @@ database:
   secretName: bong-postgres-credentials
 migration:
   enabled: true
-  command: "npx prisma migrate deploy"
+  command: "pnpm --filter bong-api exec prisma migrate deploy"
