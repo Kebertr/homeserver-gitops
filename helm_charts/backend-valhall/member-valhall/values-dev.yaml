@@ -5,7 +5,7 @@ app:
 domain: dev-valhall.kebert.se
 image:
   repository: ghcr.io/kebertr/valhall-member-api
-  tag: dev-e1f5c86
+  tag: dev-ee82d19
 database:
   host: member-postgres-service
   port: 5432
