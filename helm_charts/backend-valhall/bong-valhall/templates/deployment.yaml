@@ -49,3 +49,5 @@ spec:
               value: {{ .Values.keycloak.realm | quote }}
             - name: KEYCLOAK_CLIENT_ID
               value: {{ .Values.keycloak.clientId | quote }}
+            - name: MEMBER_GRPC_URL
+              value: {{ .Values.grpc.memberUrl | quote }}

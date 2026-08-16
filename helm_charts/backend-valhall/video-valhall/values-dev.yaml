@@ -23,3 +23,5 @@ keycloak:
   url: https://auth.kebert.se
   realm: valhall
   clientId: valhall-api-dev
+grpc:
+  memberUrl: member-service:50051
