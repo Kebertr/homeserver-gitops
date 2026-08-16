@@ -26,3 +26,4 @@ keycloak:
   clientId: valhall-api
 grpc:
   memberUrl: member-service:50051
+frontendUrl: https://valhall.kebert.se

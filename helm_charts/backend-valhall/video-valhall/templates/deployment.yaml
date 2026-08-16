@@ -69,3 +69,5 @@ spec:
               value: {{ .Values.keycloak.clientId | quote }}
             - name: MEMBER_GRPC_URL
               value: {{ .Values.grpc.memberUrl | quote }}
+            - name: FRONTEND_URL
+              value: {{ .Values.frontendUrl | quote }}

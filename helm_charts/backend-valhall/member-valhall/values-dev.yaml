@@ -23,3 +23,4 @@ keycloak:
   clientId: valhall-api-dev
 grpc:
   port: 50051
+frontendUrl: https://dev-valhall.kebert.se
