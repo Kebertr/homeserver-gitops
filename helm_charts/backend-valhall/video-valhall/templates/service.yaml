@@ -11,6 +11,10 @@ spec:
   selector:
     app: {{ .Values.app.name }}
   ports:
-  - port: 80
-    targetPort: 3003
+    - name: http
+      port: 80
+      targetPort: {{ .Values.app.port }}
+    - name: grpc
+      port: {{ .Values.grpc.port }}
+      targetPort: {{ .Values.grpc.port }}
   type: ClusterIP

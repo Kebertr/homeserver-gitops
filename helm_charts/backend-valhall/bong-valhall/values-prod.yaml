@@ -20,4 +20,5 @@ keycloak:
   clientId: valhall-api
 grpc:
   memberUrl: member-service:50051
+  videoUrl: video-service:50052
 frontendUrl: https://valhall.kebert.se
