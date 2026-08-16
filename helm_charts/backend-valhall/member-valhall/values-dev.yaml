@@ -5,7 +5,7 @@ app:
 domain: dev-valhall.kebert.se
 image:
   repository: ghcr.io/kebertr/valhall-member-api
-  tag: dev-e1f5c86
+  tag: dev-ee82d19
 database:
   host: member-postgres-service
   port: 5432
@@ -16,4 +16,4 @@ keycloak:
   clientId: valhall-api-dev
 migration:
   enabled: true
-  command: "npx prisma migrate deploy"
+  command: "pnpm --filter member-api exec prisma migrate deploy"

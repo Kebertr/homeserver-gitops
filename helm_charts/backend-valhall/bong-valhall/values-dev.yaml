@@ -5,11 +5,11 @@ app:
 domain: dev-valhall.kebert.se
 image:
   repository: ghcr.io/kebertr/valhall-bong-api
-  tag: dev-e721ef0
+  tag: dev-ee82d19
 database:
   host: bong-postgres-service
   port: 5432
   secretName: bong-postgres-credentials
 migration:
   enabled: true
-  command: "npx prisma migrate deploy"
+  command: "pnpm --filter bong-api exec prisma migrate deploy"

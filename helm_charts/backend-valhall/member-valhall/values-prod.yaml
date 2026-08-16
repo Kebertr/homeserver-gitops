@@ -16,4 +16,4 @@ keycloak:
   clientId: valhall-api
 migration:
   enabled: true
-  command: "npx prisma migrate deploy"
+  command: "pnpm --filter member-api exec prisma migrate deploy"
