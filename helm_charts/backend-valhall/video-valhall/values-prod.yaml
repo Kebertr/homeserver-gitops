@@ -14,3 +14,9 @@ database:
 migration:
   enabled: true
   command: "pnpm --filter videos-api exec prisma migrate deploy"
+minio:
+  endpoint: minio-service.minio.svc.cluster.local
+  port: 9000
+  useSSL: "false"
+  bucket: valhall-videos
+  secretName: video-minio-credentials

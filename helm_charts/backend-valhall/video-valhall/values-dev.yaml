@@ -9,7 +9,13 @@ image:
 database:
   host: video-postgres-service
   port: 5432
-  secretName: video-postgres-credentials
+  secretName: video-postgres-credentials-dev
 migration:
   enabled: true
   command: "pnpm --filter videos-api exec prisma migrate deploy"
+minio:
+  endpoint: minio-service.minio.svc.cluster.local
+  port: 9000
+  useSSL: "false"
+  bucket: valhall-videos-dev
+  secretName: video-minio-credentials-dev

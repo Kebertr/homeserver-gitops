@@ -9,7 +9,7 @@ image:
 database:
   host: member-postgres-service
   port: 5432
-  secretName: member-postgres-credentials
+  secretName: member-postgres-credentials-dev
 keycloak:
   url: https://auth.kebert.se
   realm: valhall

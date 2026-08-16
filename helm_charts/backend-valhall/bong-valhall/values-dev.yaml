@@ -9,7 +9,7 @@ image:
 database:
   host: bong-postgres-service
   port: 5432
-  secretName: bong-postgres-credentials
+  secretName: bong-postgres-credentials-dev
 migration:
   enabled: true
   command: "pnpm --filter bong-api exec prisma migrate deploy"
