@@ -5,11 +5,25 @@ app:
 domain: dev-valhall.kebert.se
 image:
   repository: ghcr.io/kebertr/valhall-video-api
-  tag: dev-ee82d19
+  tag: dev-f7e4a74
 database:
   host: video-postgres-service
   port: 5432
-  secretName: video-postgres-credentials
+  secretName: video-postgres-credentials-dev
 migration:
   enabled: true
   command: "pnpm --filter videos-api exec prisma migrate deploy"
+minio:
+  endpoint: upload.kebert.se
+  port: 443
+  useSSL: "true"
+  bucket: valhall-videos-dev
+  secretName: video-minio-credentials-dev
+keycloak:
+  url: https://auth.kebert.se
+  realm: valhall
+  clientId: valhall-api-dev
+grpc:
+  port: 50052
+  memberUrl: member-service:50051
+frontendUrl: https://dev-valhall.kebert.se

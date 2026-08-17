@@ -14,3 +14,17 @@ database:
 migration:
   enabled: true
   command: "pnpm --filter videos-api exec prisma migrate deploy"
+minio:
+  endpoint: upload.kebert.se
+  port: 443
+  useSSL: "true"
+  bucket: valhall-videos
+  secretName: video-minio-credentials
+keycloak:
+  url: https://auth.kebert.se
+  realm: valhall
+  clientId: valhall-api
+grpc:
+  port: 50052
+  memberUrl: member-service:50051
+frontendUrl: https://valhall.kebert.se

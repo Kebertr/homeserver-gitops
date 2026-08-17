@@ -14,3 +14,11 @@ database:
 migration:
   enabled: true
   command: "pnpm --filter bong-api exec prisma migrate deploy"
+keycloak:
+  url: https://auth.kebert.se
+  realm: valhall
+  clientId: valhall-api
+grpc:
+  memberUrl: member-service:50051
+  videoUrl: video-service:50052
+frontendUrl: https://valhall.kebert.se

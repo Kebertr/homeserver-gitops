@@ -19,9 +19,13 @@ spec:
           ports:
             - name: http
               containerPort: {{ .Values.app.port }}
+            - name: grpc
+              containerPort: {{ .Values.grpc.port }}
           env:
             - name: PORT
               value: {{ .Values.app.port | quote }}
+            - name: GRPC_PORT
+              value: {{ .Values.grpc.port | quote }}
             - name: DB_HOST
               value: {{ .Values.database.host | quote }}
             - name: DB_PORT
@@ -43,3 +47,31 @@ spec:
                   key: POSTGRES_DB
             - name: DATABASE_URL
               value: "postgresql://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?schema=public"
+            - name: MINIO_ENDPOINT
+              value: {{ .Values.minio.endpoint | quote }}
+            - name: MINIO_PORT
+              value: {{ .Values.minio.port | quote }}
+            - name: MINIO_USE_SSL
+              value: {{ .Values.minio.useSSL | quote }}
+            - name: MINIO_VIDEO_BUCKET
+              value: {{ .Values.minio.bucket | quote }}
+            - name: MINIO_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.minio.secretName | quote }}
+                  key: MINIO_ACCESS_KEY
+            - name: MINIO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.minio.secretName | quote }}
+                  key: MINIO_SECRET_KEY
+            - name: KEYCLOAK_URL
+              value: {{ .Values.keycloak.url | quote }}
+            - name: KEYCLOAK_REALM
+              value: {{ .Values.keycloak.realm | quote }}
+            - name: KEYCLOAK_CLIENT_ID
+              value: {{ .Values.keycloak.clientId | quote }}
+            - name: MEMBER_GRPC_URL
+              value: {{ .Values.grpc.memberUrl | quote }}
+            - name: FRONTEND_URL
+              value: {{ .Values.frontendUrl | quote }}

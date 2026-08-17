@@ -43,3 +43,15 @@ spec:
                   key: POSTGRES_DB
             - name: DATABASE_URL
               value: "postgresql://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?schema=public"
+            - name: KEYCLOAK_URL
+              value: {{ .Values.keycloak.url | quote }}
+            - name: KEYCLOAK_REALM
+              value: {{ .Values.keycloak.realm | quote }}
+            - name: KEYCLOAK_CLIENT_ID
+              value: {{ .Values.keycloak.clientId | quote }}
+            - name: MEMBER_GRPC_URL
+              value: {{ .Values.grpc.memberUrl | quote }}
+            - name: VIDEO_GRPC_URL
+              value: {{ .Values.grpc.videoUrl | quote }}
+            - name: FRONTEND_URL
+              value: {{ .Values.frontendUrl | quote }}

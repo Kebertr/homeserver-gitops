@@ -19,9 +19,13 @@ spec:
           ports:
             - name: http
               containerPort: {{ .Values.app.port }}
+            - name: grpc
+              containerPort: {{ .Values.grpc.port }}
           env:
             - name: PORT
               value: {{ .Values.app.port | quote }}
+            - name: GRPC_PORT
+              value: {{ .Values.grpc.port | quote }}
             - name: KEYCLOAK_URL
               value: {{ .Values.keycloak.url | quote }}
             - name: KEYCLOAK_REALM
@@ -49,3 +53,5 @@ spec:
                   key: POSTGRES_DB
             - name: DATABASE_URL
               value: "postgresql://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?schema=public"
+            - name: FRONTEND_URL
+              value: {{ .Values.frontendUrl | quote }}

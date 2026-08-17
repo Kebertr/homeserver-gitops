@@ -9,7 +9,7 @@ app:
 StorageClassName: local-path
 Timezone: "Europe/Stockholm"
 
-DBSecretName: video-postgres-credentials
+DBSecretName: video-postgres-credentials-dev
 DBImage: postgres:16
 DBResourceLimit: true
 DBCPU: "1000m"

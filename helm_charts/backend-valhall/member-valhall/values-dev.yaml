@@ -5,11 +5,11 @@ app:
 domain: dev-valhall.kebert.se
 image:
   repository: ghcr.io/kebertr/valhall-member-api
-  tag: dev-ee82d19
+  tag: dev-f7e4a74
 database:
   host: member-postgres-service
   port: 5432
-  secretName: member-postgres-credentials
+  secretName: member-postgres-credentials-dev
 keycloak:
   url: https://auth.kebert.se
   realm: valhall
@@ -17,3 +17,10 @@ keycloak:
 migration:
   enabled: true
   command: "pnpm --filter member-api exec prisma migrate deploy"
+keycloak:
+  url: https://auth.kebert.se
+  realm: valhall
+  clientId: valhall-api-dev
+grpc:
+  port: 50051
+frontendUrl: https://dev-valhall.kebert.se
