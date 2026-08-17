@@ -5,12 +5,11 @@ app:
 domain: valhall.kebert.se
 image:
   repository: ghcr.io/kebertr/valhall-video-api
-  tag: build-19
+  tag: prod-6d270b1
 database:
   host: video-postgres-service
   port: 5432
   secretName: video-postgres-credentials
-
 migration:
   enabled: true
   command: "pnpm --filter videos-api exec prisma migrate deploy"
