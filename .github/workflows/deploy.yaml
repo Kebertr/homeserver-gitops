@@ -6,7 +6,7 @@ on:
 
 jobs:
   validate:
-    runs-on: homeserver-gitops
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
