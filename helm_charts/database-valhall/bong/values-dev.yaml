@@ -14,4 +14,4 @@ DBImage: postgres:16
 DBResourceLimit: true
 DBCPU: "100m"
 DBMemory: "256Mi"
-DBStorage: 1Gi
+DBStorage: 10Gi
