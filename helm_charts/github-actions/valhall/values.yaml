@@ -4,8 +4,8 @@ githubConfigUrl: https://github.com/Kebertr/valhall
 
 githubConfigSecret: github-runner-sec
 
-minRunners: 1
-maxRunners: 2
+minRunners: 0
+maxRunners: 0
 
 controllerServiceAccount:
   namespace: arc

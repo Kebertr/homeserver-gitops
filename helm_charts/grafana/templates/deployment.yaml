@@ -56,8 +56,14 @@ spec:
         configMap:
           name: datasources
       - name: dashboards
-        configMap:
-          name: server-dashboard
+        projected:
+          sources:
+            - configMap:
+                name: server-dashboard
+            - configMap:
+                name: valhall-dev-application-dashboard
+            - configMap:
+                name: valhall-dev-resources-dashboard
       - name: dashboard-provider
         configMap:
           name: dashboard-provider
