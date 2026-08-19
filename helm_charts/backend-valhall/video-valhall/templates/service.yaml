@@ -5,7 +5,7 @@ metadata:
   name: {{ .Values.app.name }}
   annotations:
     prometheus.io/scrape: "true"
-    prometheus.io/port: {{ .Values.app.port}}
+    prometheus.io/port: {{ .Values.app.port | quote }}
     prometheus.io/path: "/metrics"
 spec:
   selector:
