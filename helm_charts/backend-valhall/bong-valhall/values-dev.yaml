@@ -5,7 +5,7 @@ app:
 domain: dev-valhall.kebert.se
 image:
   repository: ghcr.io/kebertr/valhall-bong-api
-  tag: dev-cdd734d
+  tag: dev-ebb8fa6
 database:
   host: bong-postgres-service
   port: 5432
