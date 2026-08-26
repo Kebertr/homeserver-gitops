@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/Kebertr/homeserver-gitops.git
     targetRevision: main
-    path: helm_charts/grafana
+    path: helm_charts/monitoring/grafana
 
   destination:
     server: https://kubernetes.default.svc

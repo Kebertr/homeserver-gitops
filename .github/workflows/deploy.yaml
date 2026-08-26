@@ -6,7 +6,7 @@ on:
 
 jobs:
   validate:
-    runs-on: homeserver-gitops
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -42,10 +42,10 @@ jobs:
         run: helm lint helm_charts/nginx
 
       - name: Helm Lint Prometheus
-        run: helm lint helm_charts/prometheus
+        run: helm lint helm_charts/monitoring/prometheus
 
       - name: Helm Lint grafana
-        run: helm lint helm_charts/grafana
+        run: helm lint helm_charts/monitoring/grafana
 
       - name: Helm Lint postgres
         run: helm lint helm_charts/database-valhall/bong -f helm_charts/database-valhall/bong/values-prod.yaml
@@ -102,10 +102,10 @@ jobs:
         run: helm template test helm_charts/nginx > /dev/null
         
       - name: Helm Render Prometheus
-        run: helm template test helm_charts/prometheus > /dev/null
+        run: helm template test helm_charts/monitoring/prometheus > /dev/null
 
       - name: Helm Render grafana
-        run: helm template test helm_charts/grafana > /dev/null
+        run: helm template test helm_charts/monitoring/grafana > /dev/null
 
       - name: Helm Render postgres
         run: helm template test helm_charts/database-valhall/bong -f helm_charts/database-valhall/bong/values-prod.yaml > /dev/null
