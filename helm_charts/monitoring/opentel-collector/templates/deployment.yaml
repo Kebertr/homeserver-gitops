@@ -17,12 +17,12 @@ spec:
 
     spec:
       containers:
-        - name: otel-collector
+        - name: opentel-collector
 
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
 
           args:
-            - "--config=/etc/otelcol/config.yaml"
+            - "--config=/etc/opentelcol/config.yaml"
 
           ports:
             - name: otlp-grpc
@@ -33,9 +33,9 @@ spec:
 
           volumeMounts:
             - name: config
-              mountPath: /etc/otelcol
+              mountPath: /etc/opentelcol
 
       volumes:
         - name: config
           configMap:
-            name: otel-collector-conf
+            name: opentel-collector-conf
