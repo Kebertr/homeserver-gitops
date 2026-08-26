@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: grafana
+  name: opentel-collector
   namespace: argocd
 spec:
   project: default
@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/Kebertr/homeserver-gitops.git
     targetRevision: main
-    path: helm_charts/monitoring/grafana
+    path: helm_charts/monitoring/opentel-collector
 
   destination:
     server: https://kubernetes.default.svc
