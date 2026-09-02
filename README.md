@@ -6,20 +6,12 @@ Argo CD watches this repository and reconciles the cluster with the desired stat
 
 ## Architecture
 
-```text
-Git repository
-      |
-      v
-   Argo CD
-      |
-      v
-Helm charts and Kubernetes resources
-      |
-      v
-    K3s cluster
-```
+See [Architecture](docs/architecture.md) for the system diagram and a
+description of its main boundaries.
 
-Public traffic enters through Cloudflare Tunnel and is forwarded to either Kong or Traefik. Private administrative services are exposed through Tailscale.
+At a high level, Argo CD reconciles this Git repository into K3s. Public traffic
+enters through Cloudflare Tunnel and is forwarded to either Kong or Traefik,
+while private administrative services are exposed through Tailscale.
 
 ## Repository structure
 
