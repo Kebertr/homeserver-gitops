@@ -2,95 +2,101 @@
 
 ## System overview
 
-The homeserver is a K3s cluster whose desired state is stored in this GitHub
-repository. Argo CD continuously reconciles the repository's Argo CD
-Applications and Helm charts into the cluster.
+### Simplified diagram for system overview
+```mermaid
+flowchart LR
+    admin[Administrator]
+    users[Public users]
 
-Public traffic reaches the cluster through Cloudflare Tunnel. Cloudflared sends
-the Valhall and upload hostnames to Kong Gateway and sends the remaining
-`*.kebert.se` hostnames to Traefik. Private administrative endpoints are
-published through the Tailscale operator instead of Cloudflare.
+    subgraph github[GitHub]
+        source[Valhall source]
+        actions[GitHub Actions]
+        registry[Container images]
+        gitops[GitOps configuration]
+    end
 
+    cloudflare[Cloudflare]
+    tailscale[Tailscale]
+
+    subgraph cluster[K3s cluster]
+        argocd[Argo CD]
+        networking[Kong and Traefik]
+        valhall[Valhall<br/>development and production]
+        keycloak[Keycloak]
+        monitoring[Grafana and Prometheus]
+        storage[(PostgreSQL and MinIO)]
+    end
+
+    admin -->|push code| source
+    source --> actions
+    actions -->|publish| registry
+
+    registry -->|image updates| gitops
+    argocd -->|read desired state| gitops
+    argocd -->|deploy and synchronize| valhall
+
+    users --> cloudflare
+    cloudflare --> networking
+    networking --> valhall
+    networking --> keycloak
+
+    admin --> tailscale
+    tailscale --> argocd
+    tailscale --> monitoring
+    tailscale --> storage
+
+    valhall --> keycloak
+    valhall --> storage
+    monitoring --> valhall
+```
+
+## Cluster architecture
 ```mermaid
 flowchart TB
-    admin[Administrator]
-    public[Public users]
-    github[(GitHub repository)]
-    cloudflare[Cloudflare<br/>DNS and Tunnel edge]
-    tailnet[Tailscale network]
+    subgraph cluster[K3s cluster]
+        subgraph servers[Three K3s server nodes]
+            scheduler[Kubernetes scheduler<br/>runs in the control plane]
 
-    subgraph home[Home network]
-        subgraph cluster[K3s cluster]
-            argocd[Argo CD]
-            cloudflared[cloudflared]
-            tailscale[Tailscale operator]
-            kong[Kong Gateway]
-            traefik[Traefik]
-
-            subgraph workloads[Application workloads]
-                valhall[Valhall<br/>frontend and APIs]
-                keycloak[Keycloak]
+            subgraph server1[Server 1: control plane, workloads and storage]
+                server1Services[etcd member<br/>stateless API workloads]
+                postgres[PostgreSQL databases]
                 minio[MinIO]
-                monitoring[Grafana and Prometheus]
-                runners[GitHub Actions runners]
+                disk[(Local persistent storage)]
+
+                postgres -->|database data| disk
+                minio -->|object data| disk
             end
 
-            subgraph data[Persistent data]
-                appdb[(Valhall PostgreSQL)]
-                authdb[(Keycloak PostgreSQL)]
-                objectdata[(MinIO object data)]
-            end
+            server2[Server 2<br/>etcd member<br/>stateless API workloads]
+            server3[Server 3<br/>etcd member<br/>stateless API workloads]
+
+            server1Services <-->|etcd replication| server2
+            server2 <-->|etcd replication| server3
+            server3 <-->|etcd replication| server1Services
+        end
+
+        subgraph agents[Agent nodes]
+            agent1[Agent 1<br/>stateless API workloads]
         end
     end
 
-    admin -->|push desired state| github
-    github -->|watched and pulled| argocd
-    argocd -->|reconciles| workloads
+    scheduler -.->|may schedule APIs| server1Services
+    scheduler -.->|may schedule APIs| server2
+    scheduler -.->|may schedule APIs| server3
+    scheduler -.->|may schedule APIs| agent1
 
-    public -->|HTTPS| cloudflare
-    cloudflare -->|outbound tunnel| cloudflared
-    cloudflared -->|Valhall and upload hosts| kong
-    cloudflared -->|other kebert.se hosts| traefik
-    kong --> valhall
-    kong -->|public bucket path| minio
-    traefik --> keycloak
-
-    admin -->|private access| tailnet
-    tailnet --> tailscale
-    tailscale --> monitoring
-    tailscale -->|private console| minio
-    tailscale -->|private administration| argocd
-    tailscale -->|private gateway access| kong
-
-    valhall --> appdb
-    valhall -->|authentication| keycloak
-    keycloak --> authdb
-    minio --> objectdata
+    scheduler -->|stateful workloads pinned to Server 1| postgres
+    scheduler -->|stateful workloads pinned to Server 1| minio
 ```
 
-Arrows show the main control and request paths, not every Kubernetes resource.
-All components inside the K3s boundary are deployed as Kubernetes workloads or
-controllers. PostgreSQL and MinIO use persistent volumes backed by the
-cluster's `local-path` storage class.
+This diagram demonstrates how the clsuter work. We have acontrol plane of 3 nodes. Then I have one worker that's not reliably active. So we need to store replicas on one of the 3 nodes in the control plane aswell.
 
-## Boundaries and responsibilities
+The storage right now is only on server 1. This have disadvantages and will be updated in teh future with wal and more. I have already started implementing cloudNativePg for this. But right now the stateful workloads need to be on server 1 since it is there where they are stored on the physical disk. the other 2 servers in the control plane can also take stateless API:s. There is a etch replication and snapshot on all. 
 
-- **GitHub and Argo CD:** GitHub holds the desired state; Argo CD pulls it and
-  corrects drift in the cluster.
-- **Cloudflare:** Provides the public edge and tunnel. The cluster does not need
-  a direct inbound route for the traffic represented here.
-- **Kong and Traefik:** Cloudflared selects the internal ingress controller by
-  hostname. Each Kubernetes Ingress also declares its owning ingress class.
-- **Tailscale:** Provides the private path to operational services and selected
-  data endpoints.
-- **Persistent data:** Application databases and MinIO data survive workload
-  restarts through persistent volume claims. Backup flows are intentionally
-  omitted and should be documented separately.
+## Gitops architecture
 
-## Scope
+## Network architecture
 
-This is the high-level map of the system. Detailed diagrams should live with
-their relevant documentation: request routing in `networking.md`, GitOps and CI
-in `deployment.md`, and persistence and recovery in `storage.md`. The
-[application catalogue](applications.md) documents each controller and
-workload shown here.
+## Valhall application architecutre
+
+## Storage architecture
