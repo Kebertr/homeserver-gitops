@@ -8,4 +8,4 @@ image:
   repository: ghcr.io/kebertr/valhall-frontend
   tag: build-12
 api:
-  serviceName: bong-service
+  serviceName: penalty-service

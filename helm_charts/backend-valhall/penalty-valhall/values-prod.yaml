@@ -1,23 +1,24 @@
 app:
-  name: bong-service
+  name: penalty-service
   replicas: 1
   port: 3001
-domain: dev-valhall.kebert.se
+domain: valhall.kebert.se
 image:
   repository: ghcr.io/kebertr/valhall-bong-api
-  tag: dev-ebb8fa6
+  tag: build-19
 database:
   host: bong-postgres-service
   port: 5432
-  secretName: bong-postgres-credentials-dev
+  secretName: bong-postgres-credentials
+
 migration:
   enabled: true
   command: "pnpm --filter bong-api exec prisma migrate deploy"
 keycloak:
   url: https://auth.kebert.se
   realm: valhall
-  clientId: valhall-api-dev
+  clientId: valhall-api
 grpc:
   memberUrl: member-service:50051
   videoUrl: video-service:50052
-frontendUrl: https://dev-valhall.kebert.se
+frontendUrl: https://valhall.kebert.se
