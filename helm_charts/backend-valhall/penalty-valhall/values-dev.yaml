@@ -4,7 +4,7 @@ app:
   port: 3001
 domain: dev-valhall.kebert.se
 image:
-  repository: ghcr.io/kebertr/valhall-bong-api
+  repository: ghcr.io/kebertr/valhall-penalty-api
   tag: dev-ebb8fa6
 database:
   host: bong-postgres-service
