@@ -52,7 +52,7 @@ The repository currently includes configuration for:
 - GitHub Actions runners
 - Valhall frontend
 - Valhall member API
-- Valhall bong API
+- Valhall penalty API
 - Valhall PostgreSQL databases
 
 ## Traffic flow
@@ -157,9 +157,9 @@ helm template <release-name> <chart-directory> -f <values-file>
 Example:
 
 ```bash
-helm template bong-valhall \
-  helm_charts/backend-valhall/bong-valhall \
-  -f helm_charts/backend-valhall/bong-valhall/values-dev.yaml
+helm template penalty-valhall \
+  helm_charts/backend-valhall/penalty-valhall \
+  -f helm_charts/backend-valhall/penalty-valhall/values-dev.yaml
 ```
 
 Update Kong chart dependencies when required:

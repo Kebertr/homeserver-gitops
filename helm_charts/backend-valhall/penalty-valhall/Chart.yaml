@@ -1,0 +1,6 @@
+# Chart.yaml
+apiVersion: v2
+name: penalty-service
+description: GitOps chart for the penalty service
+version: 1.0.0
+appVersion: "1.0"
