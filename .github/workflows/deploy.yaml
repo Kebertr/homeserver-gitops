@@ -59,11 +59,11 @@ jobs:
       - name: Helm Lint member postgres dev
         run: helm lint helm_charts/database-valhall/member -f helm_charts/database-valhall/member/values-dev.yaml
 
-      - name: Helm Lint bong
-        run: helm lint helm_charts/backend-valhall/bong-valhall -f helm_charts/backend-valhall/bong-valhall/values-prod.yaml
+      - name: Helm Lint penalty
+        run: helm lint helm_charts/backend-valhall/penalty-valhall -f helm_charts/backend-valhall/penalty-valhall/values-prod.yaml
 
-      - name: Helm Lint bong dev
-        run: helm lint helm_charts/backend-valhall/bong-valhall -f helm_charts/backend-valhall/bong-valhall/values-dev.yaml
+      - name: Helm Lint penalty dev
+        run: helm lint helm_charts/backend-valhall/penalty-valhall -f helm_charts/backend-valhall/penalty-valhall/values-dev.yaml
 
       - name: Helm Lint member
         run: helm lint helm_charts/backend-valhall/member-valhall -f helm_charts/backend-valhall/member-valhall/values-prod.yaml
@@ -119,11 +119,11 @@ jobs:
       - name: Helm Render member postgres dev
         run: helm template test helm_charts/database-valhall/member -f helm_charts/database-valhall/member/values-dev.yaml > /dev/null
 
-      - name: Helm Render bong
-        run: helm template test helm_charts/backend-valhall/bong-valhall -f helm_charts/backend-valhall/bong-valhall/values-prod.yaml > /dev/null
+      - name: Helm Render penalty
+        run: helm template test helm_charts/backend-valhall/penalty-valhall -f helm_charts/backend-valhall/penalty-valhall/values-prod.yaml > /dev/null
 
-      - name: Helm Render bong dev
-        run: helm template test helm_charts/backend-valhall/bong-valhall -f helm_charts/backend-valhall/bong-valhall/values-dev.yaml > /dev/null
+      - name: Helm Render penalty dev
+        run: helm template test helm_charts/backend-valhall/penalty-valhall -f helm_charts/backend-valhall/penalty-valhall/values-dev.yaml > /dev/null
 
       - name: Helm Render member
         run: helm template test helm_charts/backend-valhall/member-valhall -f helm_charts/backend-valhall/member-valhall/values-prod.yaml > /dev/null

@@ -12,7 +12,7 @@ database:
   secretName: bong-postgres-credentials-dev
 migration:
   enabled: true
-  command: "pnpm --filter bong-api exec prisma migrate deploy"
+  command: "pnpm --filter penalty-api exec prisma migrate deploy"
 keycloak:
   url: https://auth.kebert.se
   realm: valhall
