@@ -6,6 +6,6 @@ environment: Production
 message: "Frontend Prod Environment"
 image:
   repository: ghcr.io/kebertr/valhall-frontend
-  tag: build-12
+  tag: prod-6d270b1
 api:
   serviceName: penalty-service
