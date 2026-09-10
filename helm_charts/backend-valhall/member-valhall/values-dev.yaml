@@ -24,3 +24,9 @@ keycloak:
 grpc:
   port: 50051
 frontendUrl: https://dev-valhall.kebert.se
+scheduling:
+  spreadAcrossNodes: false
+
+rollingUpdate:
+  maxSurge: 1
+  maxUnavailable: 0

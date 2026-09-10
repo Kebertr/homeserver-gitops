@@ -1,4 +1,11 @@
-replicaCount: 1
+replicaCount: 2
+
+scheduling:
+  spreadAcrossNodes: true
+
+rollingUpdate:
+  maxSurge: 0
+  maxUnavailable: 1
 
 image:
   repository: otel/opentelemetry-collector-contrib

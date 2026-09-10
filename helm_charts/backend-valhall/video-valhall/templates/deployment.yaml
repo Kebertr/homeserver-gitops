@@ -4,6 +4,11 @@ metadata:
   name: {{ .Values.app.name }}
 spec:
   replicas: {{ .Values.app.replicas }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: {{ .Values.rollingUpdate.maxSurge }}
+      maxUnavailable: {{ .Values.rollingUpdate.maxUnavailable }}
   selector:
     matchLabels:
       app: {{ .Values.app.name }}
@@ -12,6 +17,15 @@ spec:
       labels:
         app: {{ .Values.app.name }}
     spec:
+      {{- if .Values.scheduling.spreadAcrossNodes }}
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app: {{ .Values.app.name }}
+              topologyKey: kubernetes.io/hostname
+      {{- end }}
       containers:
         - name: {{ .Values.app.name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"

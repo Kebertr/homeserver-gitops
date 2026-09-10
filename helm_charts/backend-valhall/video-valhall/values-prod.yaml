@@ -1,6 +1,6 @@
 app:
   name: video-service
-  replicas: 1
+  replicas: 2
   port: 3003
 domain: valhall.kebert.se
 image:
@@ -27,3 +27,9 @@ grpc:
   port: 50052
   memberUrl: member-service:50051
 frontendUrl: https://valhall.kebert.se
+scheduling:
+  spreadAcrossNodes: true
+
+rollingUpdate:
+  maxSurge: 0
+  maxUnavailable: 1
