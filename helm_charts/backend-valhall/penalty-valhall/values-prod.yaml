@@ -1,6 +1,6 @@
 app:
   name: penalty-service
-  replicas: 1
+  replicas: 2
   port: 3001
 domain: valhall.kebert.se
 image:
@@ -21,3 +21,9 @@ grpc:
   memberUrl: member-service:50051
   videoUrl: video-service:50052
 frontendUrl: https://valhall.kebert.se
+scheduling:
+  spreadAcrossNodes: true
+
+rollingUpdate:
+  maxSurge: 0
+  maxUnavailable: 1
