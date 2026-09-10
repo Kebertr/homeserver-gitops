@@ -1,6 +1,6 @@
 app:
   name: member-service
-  replicas: 1
+  replicas: 2
   port: 3002
 domain: valhall.kebert.se
 image:
@@ -24,3 +24,9 @@ keycloak:
 grpc:
   port: 50051
 frontendUrl: https://valhall.kebert.se
+scheduling:
+  spreadAcrossNodes: true
+
+rollingUpdate:
+  maxSurge: 0
+  maxUnavailable: 1
