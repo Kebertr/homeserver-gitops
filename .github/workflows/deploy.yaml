@@ -143,6 +143,16 @@ jobs:
       - name: Helm Render kong
         run: helm template test helm_charts/kong-gateway > /dev/null
 
+      - name: Validate Leetify charts
+        run: |
+          for component in frontend backend; do
+            for environment in prod dev; do
+              chart="helm_charts/${component}-leetify"
+              helm lint "$chart" -f "$chart/values-${environment}.yaml"
+              helm template test "$chart" -f "$chart/values-${environment}.yaml" > /dev/null
+            done
+          done
+
       - name: Success
         run: echo "GitOps validation passed"
 

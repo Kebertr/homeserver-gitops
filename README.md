@@ -399,3 +399,40 @@ To see argocd password for admin
   -o jsonpath='{.data.password}' | base64 --decode
 echo
 ```
+
+## Leetify
+
+Leetify (`Kebertr/leetify-tracking`) follows the Valhall application layout:
+
+| Environment | GitOps branch | Namespace | Frontend hostname |
+| --- | --- | --- | --- |
+| Production | `main` | `leetify` | `leetify.kebert.se` |
+| Development | `dev` | `leetify-dev` | `dev-leetify.kebert.se` |
+
+The four Applications in `applications/leetify/` are discovered by the root
+Application. Charts live in `helm_charts/frontend-leetify` and
+`helm_charts/backend-leetify`, each with `values-prod.yaml` and `values-dev.yaml`.
+The frontend listens on 8080 and proxies `/api/` to the backend Service on
+port 80, stripping `/api/`. The backend listens on 8000 and is internal only.
+Both containers expose `/healthz`. No database or application secrets are needed.
+
+Before the first sync:
+
+- Publish `ghcr.io/kebertr/leetify-frontend` and
+  `ghcr.io/kebertr/leetify-backend-api` from the source repository's respective
+  `frontend/` and `backend/` Docker build contexts. That repository currently
+  has no image-publishing workflow. The initial values expect `prod-latest`
+  and `dev-latest`; alternatively set the values to existing immutable tags.
+- Ensure the cluster and image updater can pull these images (for example,
+  make the GHCR packages public).
+- Put the charts and development values on the GitOps `dev` branch as well
+  as `main`, matching the Valhall branch convention.
+- Route both hostnames to the existing Kong ingress. The ingress uses
+  `letsencrypt-staging`, matching Valhall; its certificates are not browser-trusted.
+
+`argocd-install/templates/leetify-image-watcher.yaml` watches `prod-*` and
+`dev-*` tags. Production updates open a PR against `main`; development updates
+write directly to `dev`, using the existing image-updater Git credentials.
+Deploy the updated `argocd-install` chart to register the watcher.
+Image names and hostnames above are defaults for this setup, not verified
+published images or DNS records. CI lints and renders all four chart/value combinations.
