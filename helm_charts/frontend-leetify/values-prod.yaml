@@ -4,7 +4,6 @@ app:
   port: 8080
 image:
   repository: ghcr.io/kebertr/leetify-frontend
-  # Publish this bootstrap tag before syncing; the watcher selects subsequent prod-* tags.
   tag: prod-bb50dec
 domain: leetify.kebert.se
 api:
