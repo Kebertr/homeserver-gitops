@@ -1,0 +1,8 @@
+app:
+  name: backend
+  replicas: 1
+  port: 8000
+image:
+  repository: ghcr.io/kebertr/leetify-backend-api
+  # Publish this bootstrap tag before syncing; the watcher selects subsequent dev-* tags.
+  tag: dev-latest

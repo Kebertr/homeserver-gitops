@@ -1,0 +1,11 @@
+app:
+  name: frontend
+  replicas: 1
+  port: 8080
+image:
+  repository: ghcr.io/kebertr/leetify-frontend
+  # Publish this bootstrap tag before syncing; the watcher selects subsequent dev-* tags.
+  tag: dev-latest
+domain: dev-leetify.kebert.se
+api:
+  upstream: http://backend:80

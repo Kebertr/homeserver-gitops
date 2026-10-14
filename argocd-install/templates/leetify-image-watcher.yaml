@@ -1,0 +1,86 @@
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  name: leetify-watcher
+  namespace: argocd
+spec:
+  commonUpdateSettings:
+    updateStrategy: newest-build
+
+  applicationRefs:
+    - namePattern: frontend-leetify
+      images:
+        - alias: frontend
+          imageName: ghcr.io/kebertr/leetify-frontend:latest
+          commonUpdateSettings:
+            updateStrategy: newest-build
+            allowTags: "regexp:^prod-.+$"
+          manifestTargets:
+            helm:
+              name: image.repository
+              tag: image.tag
+      writeBackConfig:
+        method: git:secret:argocd/image-updater-git-creds
+        gitConfig:
+          repository: https://github.com/Kebertr/homeserver-gitops.git
+          branch: main
+          writeBackTarget: helmvalues:/helm_charts/frontend-leetify/values-prod.yaml
+          pullRequest:
+            github: {}
+
+    - namePattern: frontend-leetify-dev
+      images:
+        - alias: frontend
+          imageName: ghcr.io/kebertr/leetify-frontend:latest
+          commonUpdateSettings:
+            updateStrategy: newest-build
+            allowTags: "regexp:^dev-.+$"
+          manifestTargets:
+            helm:
+              name: image.repository
+              tag: image.tag
+      writeBackConfig:
+        method: git:secret:argocd/image-updater-git-creds
+        gitConfig:
+          repository: https://github.com/Kebertr/homeserver-gitops.git
+          branch: dev
+          writeBackTarget: helmvalues:/helm_charts/frontend-leetify/values-dev.yaml
+
+    - namePattern: backend-leetify
+      images:
+        - alias: backend
+          imageName: ghcr.io/kebertr/leetify-backend-api:latest
+          commonUpdateSettings:
+            updateStrategy: newest-build
+            allowTags: "regexp:^prod-.+$"
+          manifestTargets:
+            helm:
+              name: image.repository
+              tag: image.tag
+      writeBackConfig:
+        method: git:secret:argocd/image-updater-git-creds
+        gitConfig:
+          repository: https://github.com/Kebertr/homeserver-gitops.git
+          branch: main
+          writeBackTarget: helmvalues:/helm_charts/backend-leetify/values-prod.yaml
+          pullRequest:
+            github: {}
+
+    - namePattern: backend-leetify-dev
+      images:
+        - alias: backend
+          imageName: ghcr.io/kebertr/leetify-backend-api:latest
+          commonUpdateSettings:
+            updateStrategy: newest-build
+            allowTags: "regexp:^dev-.+$"
+          manifestTargets:
+            helm:
+              name: image.repository
+              tag: image.tag
+      writeBackConfig:
+        method: git:secret:argocd/image-updater-git-creds
+        gitConfig:
+          repository: https://github.com/Kebertr/homeserver-gitops.git
+          branch: dev
+          writeBackTarget: helmvalues:/helm_charts/backend-leetify/values-dev.yaml
+
