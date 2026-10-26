@@ -1,6 +1,8 @@
 kong:
   replicaCount: 2
 
+  nodeSelector: {}
+
   updateStrategy:
     type: RollingUpdate
     rollingUpdate:
