@@ -6,6 +6,6 @@ environment: Development
 message: "Frontend Dev Environment"
 image:
   repository: ghcr.io/kebertr/valhall-frontend
-  tag: dev-878c44f
+  tag: dev-e42cefd
 api:
   serviceName: penalty-service
