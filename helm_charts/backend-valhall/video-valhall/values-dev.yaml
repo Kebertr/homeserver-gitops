@@ -5,7 +5,7 @@ app:
 domain: dev-valhall.kebert.se
 image:
   repository: ghcr.io/kebertr/valhall-video-api
-  tag: dev-6e0e08c
+  tag: dev-e42cefd
 database:
   host: video-postgres-service
   port: 5432
