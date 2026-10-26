@@ -5,7 +5,7 @@ app:
 domain: dev-valhall.kebert.se
 image:
   repository: ghcr.io/kebertr/valhall-penalty-api
-  tag: dev-8c33d0a
+  tag: dev-686e471
 database:
   host: bong-postgres-service
   port: 5432
