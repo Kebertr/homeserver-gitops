@@ -49,7 +49,7 @@ spec:
     - namePattern: penalty-api
       images:
         - alias: penalty-api
-          imageName: ghcr.io/kebertr/valhall-bong-api:latest
+          imageName: ghcr.io/kebertr/valhall-penalty-api:latest
           commonUpdateSettings:
             updateStrategy: newest-build
             allowTags: "regexp:^prod-.+$"
