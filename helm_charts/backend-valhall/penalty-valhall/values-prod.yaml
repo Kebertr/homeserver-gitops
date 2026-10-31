@@ -5,7 +5,7 @@ app:
 domain: valhall.kebert.se
 image:
   repository: ghcr.io/kebertr/valhall-penalty-api
-  tag: prod-6d270b1
+  tag: prod-73b7a3d
 database:
   host: bong-postgres-service
   port: 5432
@@ -23,7 +23,6 @@ grpc:
 frontendUrl: https://valhall.kebert.se
 scheduling:
   spreadAcrossNodes: true
-
 rollingUpdate:
   maxSurge: 0
   maxUnavailable: 1
