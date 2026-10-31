@@ -5,7 +5,7 @@ app:
 domain: valhall.kebert.se
 image:
   repository: ghcr.io/kebertr/valhall-video-api
-  tag: prod-6d270b1
+  tag: prod-73b7a3d
 database:
   host: video-postgres-service
   port: 5432
@@ -29,7 +29,6 @@ grpc:
 frontendUrl: https://valhall.kebert.se
 scheduling:
   spreadAcrossNodes: true
-
 rollingUpdate:
   maxSurge: 0
   maxUnavailable: 1
