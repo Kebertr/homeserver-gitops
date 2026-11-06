@@ -1,0 +1,29 @@
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  name: cs2-crosshair-bot-watcher
+  namespace: argocd
+spec:
+  commonUpdateSettings:
+    updateStrategy: newest-build
+
+  applicationRefs:
+    - namePattern: cs2-crosshair-bot
+      images:
+        - alias: cs2-crosshair-bot
+          imageName: ghcr.io/rasmuseng/cs2-crosshair-bot:latest
+          commonUpdateSettings:
+            updateStrategy: newest-build
+            allowTags: "regexp:^prod-.+$"
+          manifestTargets:
+            helm:
+              name: image.repository
+              tag: image.tag
+      writeBackConfig:
+        method: git:secret:argocd/image-updater-git-creds
+        gitConfig:
+          repository: https://github.com/Kebertr/homeserver-gitops.git
+          branch: main
+          writeBackTarget: helmvalues:/helm_charts/cs2-crosshair-bot/values.yaml
+          pullRequest:
+            github: {}

@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cs2-crosshair-bot
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/Kebertr/homeserver-gitops.git
+    targetRevision: main
+    path: helm_charts/cs2-crosshair-bot
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cs2-crosshair-bot
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
