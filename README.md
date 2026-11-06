@@ -436,3 +436,22 @@ write directly to `dev`, using the existing image-updater Git credentials.
 Deploy the updated `argocd-install` chart to register the watcher.
 Image names and hostnames above are defaults for this setup, not verified
 published images or DNS records. CI lints and renders all four chart/value combinations.
+
+## CS2 Crosshair Bot
+
+The `cs2-crosshair-bot` Application deploys the public
+`ghcr.io/rasmuseng/cs2-crosshair-bot` image as a single Discord worker in the
+`cs2-crosshair-bot` namespace. It does not expose a Service or Ingress.
+
+Before the first sync, create its Discord token Secret:
+
+```bash
+kubectl create namespace cs2-crosshair-bot
+kubectl create secret generic cs2-crosshair-bot-secrets \
+  --namespace cs2-crosshair-bot \
+  --from-literal=DISCORD_TOKEN='<discord-bot-token>'
+```
+
+Optional Discord settings are in `helm_charts/cs2-crosshair-bot/values.yaml`.
+The image watcher selects `prod-*` tags and opens a pull request against
+`main`, following the production Valhall update flow.

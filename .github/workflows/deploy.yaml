@@ -153,6 +153,11 @@ jobs:
             done
           done
 
+      - name: Validate CS2 Crosshair Bot chart
+        run: |
+          helm lint helm_charts/cs2-crosshair-bot
+          helm template test helm_charts/cs2-crosshair-bot > /dev/null
+
       - name: Success
         run: echo "GitOps validation passed"
 
