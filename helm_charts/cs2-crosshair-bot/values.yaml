@@ -1,19 +1,15 @@
 app:
   name: cs2-crosshair-bot
   replicas: 1
-
 image:
   repository: ghcr.io/rasmuseng/cs2-crosshair-bot
-  tag: prod-8c5d5ed
-
+  tag: prod-914536e
 discord:
   secretName: cs2-crosshair-bot-secrets
   tokenKey: DISCORD_TOKEN
   guildId: ""
   listenToMessages: true
-
 logLevel: INFO
-
 resources:
   requests:
     cpu: 10m
