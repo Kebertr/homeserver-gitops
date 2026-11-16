@@ -26,14 +26,13 @@ spec:
           command: [sh, -ec]
           args:
             - |
+              mkdir -p /storage/{{ .Values.persistence.directory | quote }}
+              cd /storage/{{ .Values.persistence.directory | quote }}
               for folder in config servers backups logs import; do
-                mkdir -p "/storage/$DATA_DIRECTORY/$folder"
-                chown 1000:0 "/storage/$DATA_DIRECTORY/$folder"
-                chmod 2770 "/storage/$DATA_DIRECTORY/$folder"
+                mkdir -p "$folder"
+                chown 1000:0 "$folder"
+                chmod 2770 "$folder"
               done
-          env:
-            - name: DATA_DIRECTORY
-              value: {{ .Values.persistence.directory | quote }}
           securityContext:
             runAsUser: 0
             allowPrivilegeEscalation: false
@@ -62,13 +61,27 @@ spec:
             - name: TZ
               value: Europe/Stockholm
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            requests:
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
+            limits:
+              memory: {{ .Values.resources.limits.memory }}
           volumeMounts:
-            {{- range $folder := list "config" "servers" "backups" "logs" "import" }}
             - name: data
-              mountPath: {{ if eq $folder "config" }}/crafty/app/config{{ else }}/crafty/{{ $folder }}{{ end }}
-              subPath: {{ $.Values.persistence.directory }}/{{ $folder }}
-            {{- end }}
+              mountPath: /crafty/app/config
+              subPath: {{ .Values.persistence.directory }}/config
+            - name: data
+              mountPath: /crafty/servers
+              subPath: {{ .Values.persistence.directory }}/servers
+            - name: data
+              mountPath: /crafty/backups
+              subPath: {{ .Values.persistence.directory }}/backups
+            - name: data
+              mountPath: /crafty/logs
+              subPath: {{ .Values.persistence.directory }}/logs
+            - name: data
+              mountPath: /crafty/import
+              subPath: {{ .Values.persistence.directory }}/import
           readinessProbe:
             tcpSocket:
               port: dashboard

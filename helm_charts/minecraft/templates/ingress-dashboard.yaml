@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-dashboard
+  annotations:
+    tailscale.com/hostname: {{ .Values.dashboard.hostname | quote }}
+spec:
+  ingressClassName: tailscale
+  tls:
+    - hosts:
+        - {{ .Values.dashboard.hostname | quote }}
+  defaultBackend:
+    service:
+      name: {{ .Release.Name }}-dashboard
+      # Port 443 tells the Tailscale operator to use HTTPS to Crafty,
+      # accepting its self-signed backend certificate.
+      port:
+        number: 443
