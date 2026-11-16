@@ -44,11 +44,26 @@ kubectl -n minecraft logs -f statefulset/minecraft-crafty
 
 With the existing Tailscale operator running, open **https://minecraft-admin**
 from a device connected to your tailnet (or use its full MagicDNS name).
-Tailnet access policy must allow access. The dashboard service exposes only
-HTTPS through Tailscale; do not forward its port on your router.
-This is TCP forwarding to Crafty's own HTTPS endpoint, so its default
-self-signed certificate will produce a browser certificate warning. Verify the
-address before proceeding, or install a trusted certificate in Crafty.
+Tailnet access policy must allow access. The dashboard uses a private Tailscale Ingress backed by a ClusterIP Service;
+do not forward its port on your router. Tailscale terminates browser HTTPS with
+a tailnet certificate and proxies HTTPS to Crafty through Service port 443,
+which targets container port 8443. The backend's self-signed certificate is
+accepted by the operator. HTTPS must be enabled for your tailnet.
+Use the full hostname reported by the Ingress for valid browser TLS:
+
+```bash
+kubectl -n minecraft get ingress minecraft-dashboard
+```
+
+When upgrading from the earlier LoadBalancer Service, Argo CD changes the
+Service to ClusterIP and the operator removes its old proxy, then creates an
+Ingress proxy. Allow reconciliation to complete. The new proxy has a new
+Tailscale IP; a hostname suffix may appear if the old name is still occupied.
+Use the ADDRESS from the Ingress, not the old IP. Check events if it stays empty:
+
+```bash
+kubectl -n minecraft describe ingress minecraft-dashboard
+```
 
 Read the generated initial credentials privately in your terminal:
 
@@ -116,4 +131,4 @@ Crafty before deleting old storage. The new StatefulSet is `minecraft-crafty`.
 References:
 - https://docs.craftycontrol.com/pages/getting-started/installation/docker/
 - https://docs.craftycontrol.com/pages/getting-started/access/
-- https://tailscale.com/docs/kubernetes-operator/ingress/expose-workload-to-tailnet-l3
+- https://tailscale.com/docs/kubernetes-operator/ingress
