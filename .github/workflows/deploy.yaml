@@ -38,6 +38,12 @@ jobs:
       - name: Helm Lint MinIO
         run: helm lint helm_charts/minio
 
+      - name: Validate Minecraft
+        run: |
+          helm lint helm_charts/minecraft
+          helm template minecraft helm_charts/minecraft > /dev/null
+          helm template minecraft helm_charts/minecraft --set replicas=0 > /dev/null
+
       - name: Helm Lint Nginx
         run: helm lint helm_charts/nginx
 

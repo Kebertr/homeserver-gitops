@@ -1,0 +1,80 @@
+{{- if gt (int .Values.replicas) 1 }}
+{{- fail "Crafty supports only one replica sharing this data directory" }}
+{{- end }}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Release.Name }}-crafty
+spec:
+  serviceName: {{ .Release.Name }}-crafty-headless
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ .Release.Name }}-crafty
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ .Release.Name }}-crafty
+    spec:
+      nodeSelector:
+        {{- toYaml .Values.nodeSelector | nindent 8 }}
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 120
+      initContainers:
+        - name: prepare-storage
+          image: busybox:1.37.0
+          command: [sh, -ec]
+          args:
+            - |
+              for folder in config servers backups logs import; do
+                mkdir -p "/storage/$DATA_DIRECTORY/$folder"
+                chown 1000:0 "/storage/$DATA_DIRECTORY/$folder"
+                chmod 2770 "/storage/$DATA_DIRECTORY/$folder"
+              done
+          env:
+            - name: DATA_DIRECTORY
+              value: {{ .Values.persistence.directory | quote }}
+          securityContext:
+            runAsUser: 0
+            allowPrivilegeEscalation: false
+          volumeMounts:
+            - name: data
+              mountPath: /storage
+      containers:
+        - name: crafty
+          image: {{ .Values.image | quote }}
+          imagePullPolicy: Always
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 0
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: [ALL]
+            seccompProfile:
+              type: RuntimeDefault
+          ports:
+            - name: minecraft
+              containerPort: 25565
+            - name: dashboard
+              containerPort: 8443
+          env:
+            - name: TZ
+              value: Europe/Stockholm
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            {{- range $folder := list "config" "servers" "backups" "logs" "import" }}
+            - name: data
+              mountPath: {{ if eq $folder "config" }}/crafty/app/config{{ else }}/crafty/{{ $folder }}{{ end }}
+              subPath: {{ $.Values.persistence.directory }}/{{ $folder }}
+            {{- end }}
+          readinessProbe:
+            tcpSocket:
+              port: dashboard
+            periodSeconds: 10
+      volumes:
+        - name: data
+          hostPath:
+            path: {{ .Values.persistence.mountPath | quote }}
+            type: Directory

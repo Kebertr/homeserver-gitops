@@ -1,0 +1,19 @@
+# Starts the dashboard; create and start the Minecraft server in Crafty.
+replicas: 1
+image: registry.gitlab.com/crafty-controller/crafty-4:latest
+nodeSelector:
+  kubernetes.io/hostname: keb-k3s
+service:
+  nodePort: 30565
+dashboard:
+  hostname: minecraft-admin
+persistence:
+  # Must already exist as the mounted hard drive on keb-k3s.
+  mountPath: /mnt/valhall-media
+  directory: minecraft
+resources:
+  requests:
+    cpu: 500m
+    memory: 10Gi
+  limits:
+    memory: 10Gi

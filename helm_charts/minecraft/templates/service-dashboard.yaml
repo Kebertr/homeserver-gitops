@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-dashboard
+  annotations:
+    tailscale.com/hostname: {{ .Values.dashboard.hostname | quote }}
+spec:
+  type: LoadBalancer
+  loadBalancerClass: tailscale
+  allocateLoadBalancerNodePorts: false
+  selector:
+    app.kubernetes.io/name: {{ .Release.Name }}-crafty
+  ports:
+    - name: https
+      port: 443
+      targetPort: dashboard
+      protocol: TCP
