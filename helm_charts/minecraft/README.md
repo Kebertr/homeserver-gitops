@@ -1,7 +1,10 @@
 # Minecraft with Crafty Controller
 
 Crafty runs the dashboard and Minecraft process together on `keb-k3s`.
-The container has a combined 10Gi memory request/limit. Set the Minecraft
+The container reserves 8Gi for scheduling and has a combined 10Gi memory limit.
+Usage above the request shares unreserved capacity with other workloads; under
+memory pressure the pod can be evicted even before reaching its limit.
+Set the Minecraft
 maximum Java heap to **8192 MiB (8 GiB)** in Crafty, leaving room for Java's
 other allocations and the panel. This is one shared limit for all servers
 created in Crafty, not 10Gi per server. Start with one server and 20 player slots.
@@ -25,7 +28,7 @@ Confirm that this is the intended hard drive, with adequate free space. The
 chart checks that the parent directory exists, but cannot prove the drive is
 mounted. Ensure the disk mounts persistently before K3s starts, including after
 reboots; otherwise data could be written to the underlying system disk.
-The hostname label must be `keb-k3s`. The node needs 10Gi memory available for
+The hostname label must be `keb-k3s`. The node needs 8Gi memory available for
 scheduling after other workloads' requests.
 
 ## Deploy and open the dashboard
