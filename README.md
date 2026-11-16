@@ -37,6 +37,10 @@ applications/valhall/
 
 ## Managed applications
 
+Minecraft Java setup and router/DNS instructions are in
+[the Minecraft chart guide](helm_charts/minecraft/README.md). Crafty provides a private Tailscale dashboard; create the Minecraft server and
+configure its EULA, version, and whitelist there.
+
 The repository currently includes configuration for:
 
 - Argo CD

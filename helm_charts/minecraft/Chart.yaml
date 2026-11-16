@@ -1,0 +1,5 @@
+apiVersion: v2
+name: minecraft
+description: Crafty Minecraft dashboard and servers on the keb-k3s hard drive
+type: application
+version: 0.2.0
