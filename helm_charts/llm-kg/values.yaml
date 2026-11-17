@@ -6,6 +6,6 @@ imagePullSecrets:
 envSecretName: llm-kg-env
 # Enable only after confirming the application's listening port.
 service:
-  enabled: false
+  enabled: true
   port: 8000
 resources: {}
