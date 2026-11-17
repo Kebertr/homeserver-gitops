@@ -1,0 +1,11 @@
+image:
+  repository: ghcr.io/d7017e-llm-based-failure-detection/llm-kg
+  tag: "0.1.0"
+imagePullSecrets:
+  - name: ghcr-pull-secret
+envSecretName: llm-kg-env
+# Enable only after confirming the application's listening port.
+service:
+  enabled: false
+  port: 8000
+resources: {}

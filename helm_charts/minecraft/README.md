@@ -65,13 +65,20 @@ Use the ADDRESS from the Ingress, not the old IP. Check events if it stays empty
 kubectl -n minecraft describe ingress minecraft-dashboard
 ```
 
-Read the generated initial credentials privately in your terminal:
+Crafty automatically generates the initial username and password on first
+startup. You do not need to supply them in values.yaml or create a Kubernetes
+Secret for this setup. Read the generated credentials privately in your terminal:
 
 ```bash
 kubectl -n minecraft exec statefulset/minecraft-crafty -- cat /crafty/app/config/default-creds.txt
 ```
 
-Log in and change the generated password. Do not commit credentials to Git.
+Log in with those credentials and change the generated password in the
+dashboard. Crafty's account database is persisted on the hard drive under
+`/mnt/valhall-media/minecraft/config`, so accounts survive pod restarts.
+A Kubernetes Secret would require a supported credential-loading integration;
+this chart uses Crafty's generated login and persistent account database.
+Do not commit credentials or the generated credentials file to Git.
 For temporary access without Tailscale:
 
 ```bash
