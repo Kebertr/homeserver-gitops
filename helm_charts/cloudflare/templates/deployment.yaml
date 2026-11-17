@@ -9,6 +9,8 @@ spec:
   replicas:  {{ .Values.replicas }}
   template:
     metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
       labels:
         app: cloudflared
     spec:
