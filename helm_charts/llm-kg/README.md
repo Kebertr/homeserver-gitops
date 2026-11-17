@@ -47,7 +47,8 @@ manager is used, have it populate `llm-kg-env` with these five keys instead.
 ## GraphDB repositories
 
 GraphDB still needs to be deployed with persistent storage and an internal
-Service. Once the `graphdb` Service exists in namespace `llm-kg`, access its
+Service. Deploy the separate [GraphDB chart](../database-llm-kg/README.md) via
+Application `database-llm-kg`. Once the `graphdb` Service exists in namespace `llm-kg`, access its
 Workbench locally:
 
 ```bash
