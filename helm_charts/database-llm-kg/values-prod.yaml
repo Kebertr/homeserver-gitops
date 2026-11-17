@@ -1,0 +1,13 @@
+image:
+  repository: ontotext/graphdb
+  tag: "11.5.0"
+storage:
+  className: local-path
+  size: 20Gi
+heapSize: 1g
+resources:
+  requests:
+    cpu: 250m
+    memory: 2Gi
+  limits:
+    memory: 4Gi
