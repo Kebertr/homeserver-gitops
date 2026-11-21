@@ -1,0 +1,29 @@
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  name: texttv-discord-watcher
+  namespace: argocd
+spec:
+  commonUpdateSettings:
+    updateStrategy: newest-build
+
+  applicationRefs:
+    - namePattern: texttv-discord
+      images:
+        - alias: texttv-discord
+          imageName: ghcr.io/rasmuseng/texttv-discord:latest
+          commonUpdateSettings:
+            updateStrategy: newest-build
+            allowTags: "regexp:^prod-.+$"
+          manifestTargets:
+            helm:
+              name: image.repository
+              tag: image.tag
+      writeBackConfig:
+        method: git:secret:argocd/image-updater-git-creds
+        gitConfig:
+          repository: https://github.com/Kebertr/homeserver-gitops.git
+          branch: main
+          writeBackTarget: helmvalues:/helm_charts/texttv-discord/values.yaml
+          pullRequest:
+            github: {}
