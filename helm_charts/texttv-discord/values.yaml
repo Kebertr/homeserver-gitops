@@ -1,0 +1,19 @@
+app:
+  name: texttv-discord
+  replicas: 1
+image:
+  repository: ghcr.io/rasmuseng/texttv-discord
+  tag: prod-aa6b9a7
+discord:
+  secretName: texttv-discord-secrets
+  tokenKey: DISCORD_TOKEN
+  guildId: ""
+  listenToMessages: true
+logLevel: INFO
+resources:
+  requests:
+    cpu: 10m
+    memory: 64Mi
+  limits:
+    cpu: 250m
+    memory: 256Mi
